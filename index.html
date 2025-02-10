@@ -11,6 +11,28 @@
             .then(reg => console.log("Service Worker Registered!", reg))
             .catch(err => console.log("Service Worker Failed!", err));
         }
+
+        function updatePWA() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    if (registration) {
+                        registration.unregister().then(() => {
+                            caches.keys().then(cacheNames => {
+                                return Promise.all(
+                                    cacheNames.map(cacheName => caches.delete(cacheName))
+                                );
+                            }).then(() => {
+                                window.location.reload(true); // 確保強制重新載入最新版本
+                            });
+                        });
+                    } else {
+                        window.location.reload(true);
+                    }
+                });
+            } else {
+                window.location.reload(true);
+            }
+        }
     </script>    
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
