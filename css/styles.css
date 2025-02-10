@@ -169,3 +169,8 @@ body {
     margin:0;
     border-radius:4px;
 }
+
+a {
+    color: #2DD4BF;
+    text-decoration: none;
+}
