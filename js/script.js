@@ -43,4 +43,11 @@ function getLocation() {
     );
 }
 
+// 取得地點資料
 getLocation();
+
+// 整頁更新
+const updateBtn = document.getElementById("updateBtn");
+updateBtn.addEventListener("click", () => {
+    window.location.reload(); // 重新載入頁面，獲取最新版本
+});
