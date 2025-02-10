@@ -1,0 +1,43 @@
+{
+  "name": "Rescue Rush!",
+  "short_name": "Rescue Rush!",
+  "icons": [
+    {
+      "src": "/images/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/images/icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/images/icon-256x256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "screenshots": [
+    {
+      "src": "/images/screenshot-1.png",
+      "type": "image/png",
+      "sizes": "1080x1920",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/images/screenshot-2.png",
+      "type": "image/png",
+      "sizes": "1080x1920"
+    }
+  ]
+}

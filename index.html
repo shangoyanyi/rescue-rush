@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rrscue Rush!</title>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+            .then(reg => console.log("Service Worker Registered!", reg))
+            .catch(err => console.log("Service Worker Failed!", err));
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">道路救援</h1>
+
+        <div>&nbsp;</div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('esun')">玉山銀行</button>
+            <button class="tab-button" onclick="switchTab('ctbc')">中國信託</button>
+        </div>
+        
+        <div class="content-box">
+            <div id="esun" class="tab-content active">
+                <h2 class="section-title">玉山銀行 - UBear卡</h2>
+                <p><small>114/01/01 - 114/12/31</small></p>
+                <h3 class="section-title">救援說明</h3>
+                <p>這是玉山銀行的道路救援服務說明。</p>
+                <h3 class="section-title">救援項目</h3>
+                <p>提供緊急拖吊、電瓶充電、更換輪胎等服務。</p>
+
+                <div>&nbsp;</div>
+                <button class="call-button" onclick="callRescue('0800-30-1313')">立即呼叫救援</button>
+            </div>
+            <div id="ctbc" class="tab-content">
+                <h2 class="section-title">救援說明</h2>
+                <p>這是中國信託的道路救援服務說明。</p>
+                <h2 class="section-title">救援項目</h2>
+                <p>包含車輛拋錨救援、油料補給等緊急服務。</p>
+                <button class="call-button" onclick="callRescue('0800-024-365')">立即呼叫救援</button>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+    </div>
+</body>
+</html>
