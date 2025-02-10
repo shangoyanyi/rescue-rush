@@ -42,3 +42,5 @@ function getLocation() {
         }
     );
 }
+
+getLocation();
