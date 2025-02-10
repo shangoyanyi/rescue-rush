@@ -11,14 +11,23 @@
             .then(reg => console.log("Service Worker Registered!", reg))
             .catch(err => console.log("Service Worker Failed!", err));
         }
-    </script>
+    </script>    
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">道路救援</h1>
+    <div class="header">        
+        <div class="header-logo">            
+            <div class="header-title">Rescue Rush!</div>
+        </div>        
+        <div class="header-btn-menu">☰</div>
+    </div>
 
+
+    <div class="container">        
+        <div class="info-disabled">
+            <p>我的位置：<span id="location-info">查詢中...</span></p>                
+        </div>
         <div>&nbsp;</div>
 
         <div class="tabs">
@@ -28,22 +37,34 @@
         
         <div class="content-box">
             <div id="esun" class="tab-content active">
-                <h2 class="section-title">玉山銀行 - UBear卡</h2>
-                <p><small>114/01/01 - 114/12/31</small></p>
+                <div style="display:flex;">
+                    <image src="images/logo.png" class="section-logo"></image>
+                    <h2 class="section-title">玉山銀行 - UBear</h2> 
+                </div>               
+                <hr>
+
                 <h3 class="section-title">救援說明</h3>
                 <p>這是玉山銀行的道路救援服務說明。</p>
+                
+
                 <h3 class="section-title">救援項目</h3>
                 <p>提供緊急拖吊、電瓶充電、更換輪胎等服務。</p>
-
-                <div>&nbsp;</div>
+                                
                 <button class="call-button" onclick="callRescue('0800-30-1313')">立即呼叫救援</button>
+                <p class="text-center text-memo">服務中心電話：(02)1234-5678</p>
             </div>
             <div id="ctbc" class="tab-content">
-                <h2 class="section-title">救援說明</h2>
+                <h2 class="section-title">中國信託 - ALLME</h2>                
+                <hr>
+
+                <h3 class="section-title">救援說明</h3>
                 <p>這是中國信託的道路救援服務說明。</p>
-                <h2 class="section-title">救援項目</h2>
+
+                <h3 class="section-title">救援項目</h3>
                 <p>包含車輛拋錨救援、油料補給等緊急服務。</p>
+                
                 <button class="call-button" onclick="callRescue('0800-024-365')">立即呼叫救援</button>
+                <p class="text-center text-memo">服務中心電話：(02)1234-5678</p>
             </div>
         </div>
         <div>&nbsp;</div>

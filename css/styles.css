@@ -5,24 +5,75 @@ body {
     text-align: left;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    box-sizing: border-box;
+    background-color: #fff;
 }
+
+/* Sticky Header 設定 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    padding: 10px 20px;    
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(to right, #2DD4BF, #3B82F6);
+}
+
+
+/* Logo 區塊 */
+.header .header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header .header-logo img {
+    width: 48px;  /* 調整 Logo 大小 */
+    height: 48px; /* 確保 Logo 等比例縮放 */
+    object-fit: contain; /* 保持圖片完整 */
+    border-radius:4px;
+    padding-right:4px;
+}
+
+/* Title 樣式 */
+.header .header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 48px;
+}
+
+/* Menu 按鈕樣式 */
+.header .header-btn-menu {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    line-height: 48px;
+}
+
+/* Hover 樣式 */
+.header .header-btn-menu:hover {
+    color: #fff; /* 可以自定義顏色 */
+}
+
+
+
+
+
 
 .container {
     max-width: 390px;
-    margin: 40px auto;
-    background: white;
+    margin: 10px auto;
+    /* background: white; */
     padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* border-radius: 20px; */
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
 }
 
-.title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-}
+
 
 .tabs {
     display: flex;
@@ -48,7 +99,7 @@ body {
 }
 
 .tab-button.active {
-    background: #007AFF;
+    background: #2DD4BF;
     color: white;
 }
 
@@ -58,6 +109,14 @@ body {
     padding: 0 20px;
     /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
     text-align: left;
+}
+
+.section-logo {
+    height:32px;
+    width: 32px;
+    padding:10px 4px 10px 0;
+    object-fit: contain; /* 保持圖片完整 */
+    border-radius:4px;
 }
 
 .section-title {
@@ -81,7 +140,7 @@ body {
     margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
-    background: #007AFF;
+    background: #2DD4BF;
     color: white;
     border: none;
     border-radius: 60px;
@@ -90,7 +149,23 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-.call-button:hover {
-    background: #005BBB;
+.call-button:active {
+    background: #3B82F6;
     box-shadow: 0 8px 14px rgba(0, 91, 187, 0.3);
+}
+
+.text-center {
+    text-align:center;
+}
+
+.text-memo {
+    color: #2DD4BF;
+    font-size: 0.85em;
+}
+
+.info-disabled {
+    background: #f1f1f1;
+    padding:1px 10px;
+    margin:0;
+    border-radius:4px;
 }
