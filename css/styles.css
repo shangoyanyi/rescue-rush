@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'SF Pro Display', sans-serif;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 390px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 20px;
+    background: #f1f1f1;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.tab-button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+.tab-button.active {
+    background: #007AFF;
+    color: white;
+}
+
+.content-box {
+    /* background: #ffffff;
+    border-radius: 15px; */
+    padding: 0 20px;
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+    text-align: left;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 15px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.call-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #007AFF;
+    color: white;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 122, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.call-button:hover {
+    background: #005BBB;
+    box-shadow: 0 8px 14px rgba(0, 91, 187, 0.3);
+}
