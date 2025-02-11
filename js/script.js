@@ -32,7 +32,17 @@ function getLocation() {
             const data = await response.json();
 
             if (data.display_name) {
-                locationInfo.textContent = `${data.display_name}`;
+                const address = data.address;
+                // 組合完整地址
+                const fullAddress = [
+                    address.country || "",
+                    address.city || address.town || address.village || "",
+                    address.suburb || address.district || "",
+                    address.road || "",
+                    address.house_number || ""
+                ].filter(Boolean).join(", "); // 過濾掉空值，避免多餘的逗號
+
+                locationInfo.textContent = `${fullAddress}`;
             } else {
                 locationInfo.textContent = `無法取得您的位置，請確保已開啟 GPS 權限`;
             }
