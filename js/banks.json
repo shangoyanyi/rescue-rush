@@ -1,0 +1,12 @@
+[
+    {
+        "id": "esun",
+        "name": "玉山銀行",
+        "logo": "images/logo-esun.png"        
+    },
+    {
+        "id": "ctbc",
+        "name": "中國信託",
+        "logo": "images/logo-ctbc.png"        
+    }
+]

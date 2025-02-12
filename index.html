@@ -36,6 +36,9 @@
     </script>    
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
+
+    <link rel="stylesheet" href="css/dropdown.css">
+    <script defer src="js/dropdown.js"></script>
 </head>
 <body>
     <div class="header">        
@@ -52,17 +55,38 @@
         </div>
         <div>&nbsp;</div>
 
-        <div class="tabs">
-            <button class="tab-button active" onclick="switchTab('esun')">玉山銀行</button>
-            <button class="tab-button" onclick="switchTab('ctbc')">中國信託</button>
+        <!-- dropdown list -->
+        <div class="custom-dropdown">
+            <div class="dropdown-header" onclick="toggleDropdown()">
+                <img src="images/logo-esun.png" alt="Bank Logo" class="bank-logo">
+                <span class="selected-bank">玉山銀行</span>               
+                <span class="dropdown-icon"><img src="images/angle-down-solid.svg"></span>                
+            </div>
+        
+            <ul class="dropdown-list">
+                <li onclick="selectBank('esun')">
+                    <img src="images/logo-esun.png" alt="Bank Logo" class="bank-logo">
+                    玉山銀行
+                </li>
+                <li onclick="selectBank('ctbc')">
+                    <img src="images/logo-ctbc.png" alt="Bank Logo" class="bank-logo">
+                    中國信託
+                </li>                
+            </ul>
         </div>
+
+        <!-- <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('esun')">玉山銀行</button>
+            <button class="tab-button" onclick="switchTab('ctbc')">中國信託</button>            
+        </div>         -->
         
         <div class="content-box">
+            <!-- 玉山銀行 -->
             <div id="esun" class="tab-content active">
-                <div style="display:flex;">
+                <!-- <div style="display:flex;">
                     <image src="images/logo-esun.png" class="section-logo"></image>
                     <h2 class="section-title">玉山銀行 - UBear</h2> 
-                </div>
+                </div> -->
 
                 <p><b>救援項目</b></p>
                 <ul>
@@ -103,13 +127,8 @@
                 </div>
             </div>
 
-
+            <!-- ctbc 中國信託 -->
             <div id="ctbc" class="tab-content">
-                <div style="display:flex;">
-                    <image src="images/logo-ctbc.png" class="section-logo"></image>
-                    <h2 class="section-title">中國信託 - ALLME</h2>
-                </div>       
-
                 <p><b>救援項目</b></p>
                 <ul>
                     <li>拖吊(50公里內免費，超過每公里加收 60 元; 高速公路作業費用基本起拖1500內免費，超過由持卡人自付)</li>
