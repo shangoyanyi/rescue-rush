@@ -1,7 +1,15 @@
 const CACHE_NAME = "pwa-cache-v1";
 const FILES_TO_CACHE = [
     "index.html",
-    "manifest.json"
+    "manifest.json",
+    "css/dropdown.css",
+    "css/styles.css",
+    "images/angle-down-solid.svg",
+    "images/logo-ctbc.png",
+    "images/logo-esun.png",
+    "images/logo.png",
+    "js/dropdown.js",
+    "js/script.js"
 ];
 
 // 安裝 Service Worker 並快取文件
