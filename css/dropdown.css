@@ -80,7 +80,7 @@
 
 /* 選單展開 */
 .dropdown-list.active {
-    max-height: 200px;
+    max-height: 400px;
     opacity: 1;
     /* display: block; */
 }
