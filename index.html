@@ -13,6 +13,11 @@
         }
 
         function updatePWA() {
+            if(!navigator.onLine){
+                alert("目前為離線模式");
+                return;
+            }
+
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.getRegistration().then(registration => {
                     if (registration) {
@@ -93,7 +98,7 @@
                     <li>拖吊(50公里內免費，超過每公里加收 60 元; 高速公路作業費用基本起拖1500內免費，超過由持卡人自付)</li>
                     <li>充電接電(不含柴油車)</li>
                     <li>送油(不含柴油車)、加水</li>
-                    <li>更換備胎充氣</li>
+                    <li>更換備胎、充氣</li>
                 </ul>
                                 
                 <button class="call-button" onclick="callRescue('0800-011-885')">立即呼叫救援</button>
@@ -134,7 +139,7 @@
                     <li>拖吊(50公里內免費，超過每公里加收 60 元; 高速公路作業費用基本起拖1500內免費，超過由持卡人自付)</li>
                     <li>充電接電(不含柴油車)</li>
                     <li>送油(不含柴油車)、加水</li>
-                    <li>更換備胎充氣</li>
+                    <li>更換備胎、充氣</li>
                 </ul>
                 
                 <button class="call-button" onclick="callRescue('0800-000-685')">立即呼叫救援</button>
