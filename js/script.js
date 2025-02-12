@@ -15,10 +15,7 @@ function callRescue(phoneNumber) {
 }
 
 
-function setLocationNoNetwork(){
-    document.getElementById('location-info').textContent = "目前為離線模式";
-    return;
-}
+
 
 function getLocation() {
     const locationInfo = document.getElementById('location-info');

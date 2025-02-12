@@ -14,7 +14,7 @@
 
         function updatePWA() {
             if(!navigator.onLine){
-                setLocationNoNetworkText();                
+                document.getElementById('location-info').textContent = "目前為離線模式";                
                 return;
             }
 
