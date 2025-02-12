@@ -14,13 +14,14 @@ function callRescue(phoneNumber) {
     window.location.href = `tel:${phoneNumber}`;
 }
 
+
+function setLocationTextNoNetwork(){
+    locationInfo.textContent = "目前為離線模式";
+    return;
+}
+
 function getLocation() {
     const locationInfo = document.getElementById('location-info');
-
-    if(!navigator.onLine){
-        locationInfo.textContent = "目前為離線模式";
-        return;
-    }
 
     if (!navigator.geolocation) {
         locationInfo.textContent = "瀏覽器不支援查詢位置";
