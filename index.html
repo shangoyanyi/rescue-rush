@@ -44,9 +44,12 @@
 
     <link rel="stylesheet" href="css/dropdown.css">
     <script defer src="js/dropdown.js"></script>
+
+    <link rel="stylesheet" href="css/nana.css">
+    <script defer src="js/nana.js"></script>
 </head>
 <body>    
-    <div class="floating-icon"></div>
+    <!-- <div class="floating-icon"></div>
     <style>
         .floating-icon {
             position: fixed;
@@ -60,7 +63,27 @@
             box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
             cursor: pointer;
         }
-    </style>
+    </style> -->
+    <div class="floating-icon" onclick="toggleChat()"></div>
+
+    <!-- 半透明黑色遮罩 -->
+    <div class="overlay" onclick="toggleChat()"></div>
+
+    <!-- 對話框選單 -->
+    <div class="chatbox">
+        <div class="chat-header">👋 Hi! 我是 Nana</div>
+        <ul class="chat-options">
+            <li onclick="handleOption('rescue')">🚗 我要道路救援</li>
+            <li onclick="handleOption('faq')">❓ 常見問題</li>
+            <li onclick="handleOption('contact')">📞 聯絡客服</li>
+            <li onclick="toggleChat()">❌ 關閉</li>
+        </ul>
+    </div>
+
+
+
+
+
 
     <div class="header">        
         <div class="header-logo">            

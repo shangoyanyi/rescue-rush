@@ -1,0 +1,83 @@
+/* === 圓形浮動 icon === */
+.floating-icon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    background: url('../images/nana_3.png') no-repeat center center;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* === 半透明黑色遮罩 === */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 900;
+}
+
+/* === 對話框樣式的選單 === */
+.chatbox {
+    position: fixed;
+    right: 90px;
+    bottom: 30px;
+    width: 200px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    z-index: 1001;
+    display: none;
+}
+
+/* === 選單標題 === */
+.chat-header {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* === 選單內的按鈕選項 === */
+.chat-options {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-options li {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.chat-options li:hover {
+    background: #f5f5f5;
+}
+
+/* === 顯示對話框時的 class === */
+.chatbox.show {
+    opacity: 1;
+    transform: translateX(0);
+    display: block;
+}
+
+.overlay.show {
+    display: block;
+}

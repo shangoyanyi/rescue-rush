@@ -16,7 +16,6 @@ function callRescue(phoneNumber) {
 
 
 
-
 function getLocation() {
     const locationInfo = document.getElementById('location-info');
 
