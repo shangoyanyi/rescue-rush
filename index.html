@@ -48,22 +48,11 @@
     <link rel="stylesheet" href="css/nana.css">
     <script defer src="js/nana.js"></script>
 </head>
-<body>    
-    <!-- <div class="floating-icon"></div>
-    <style>
-        .floating-icon {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 60px;
-            height: 60px; /* 設定固定高度，確保為圓形 */
-            background: url('images/nana_3.png') no-repeat center center;
-            background-size: cover; /* 讓圖片填滿 */
-            border-radius: 50%;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-        }
-    </style> -->
+<body>
+    <!-- 極光效果 -->
+    <div class="aurora-effect"></div>
+
+    <!-- Nana 圓形客服按鈕 -->
     <div class="floating-icon" onclick="toggleChat()"></div>
 
     <!-- 半透明黑色遮罩 -->
@@ -76,6 +65,7 @@
             <li onclick="handleOption('rescue')">🚗 我要道路救援</li>
             <li onclick="handleOption('faq')">❓ 常見問題</li>
             <li onclick="handleOption('contact')">📞 聯絡客服</li>
+            <li onclick="updatePWA()">更新PWA</li>
             <li onclick="toggleChat()">❌ 關閉</li>
         </ul>
     </div>
