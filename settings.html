@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rescue Rush!</title>
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/script.js"></script>
+
+    <link rel="stylesheet" href="css/dropdown.css">
+    <script defer src="js/dropdown.js"></script>
+
+    <link rel="stylesheet" href="css/nana.css">
+    <script defer src="js/nana.js"></script>
+</head>
+<body>
+    <!-- 極光效果 -->
+    <div class="aurora-effect"></div>
+
+    <!-- Nana 圓形客服按鈕 -->
+    <div class="floating-icon" onclick="toggleChat()"></div>
+
+    <!-- 半透明黑色遮罩 -->
+    <div class="overlay" onclick="toggleChat()"></div>
+
+    <!-- 對話框選單 -->
+    <div class="chatbox">
+        <div class="chat-header">👋 Hi! 我是 Nana</div>
+        <ul class="chat-options">
+            <li onclick="handleOption('home')">首頁</li>
+            <li onclick="handleOption('weather')">查詢天氣</li>
+            <li onclick="handleOption('settings')">PWA設定</li>
+            <li onclick="updatePWA()">更新PWA</li>
+            <li onclick="toggleChat()">❌ 關閉</li>
+        </ul>
+    </div>
+
+
+
+
+
+
+    <div class="header">        
+        <div class="header-logo">            
+            <div class="header-title">Rescue Rush!</div>
+        </div>        
+        <div class="header-btn-menu">             
+            <span id="updateBtn">⟳</span>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="content-box">
+            <h2 class="section-title">設定</h2>
+            
+        </div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+    </div>
+</body>
+</html>

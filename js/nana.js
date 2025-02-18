@@ -16,6 +16,14 @@ function handleOption(option) {
     console.log("選擇的選項:", option);
     alert(`你選擇了: ${option}`);
 
+    if('home'==option){
+        location.href = 'index.html';
+    }
+
+    if('settings'==option){
+        location.href = 'settings.html';
+    }
+
     if('weather'==option){
         QueryWeather();
     }
