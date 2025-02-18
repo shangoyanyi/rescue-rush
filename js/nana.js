@@ -34,34 +34,63 @@ async function QueryWeather(){
         let data = await response.json();
 
         // 檢查 API 是否成功回應
-        if (!data || !data.records || !data.records.locations || !data.records.locations[0].location) {
+        if (!data || !data.records || !data.records.Locations || !data.records.Locations[0].Location) {
             console.error("❌ 無法取得天氣資料");
             return;
         }
 
-        // 取得天氣資料
-        let locationData = data.records.locations[0].location[0];
-        let temperatureData = locationData.weatherElement.find(e => e.elementName === "溫度");
+        // 取得北投區的天氣資料
+        let locationData = data.records.Locations[0].Location.find(loc => loc.LocationName === "北投區");
+        if (!locationData) {
+            console.error("❌ 找不到北投區的天氣資料");
+            return;
+        }
 
-        if (!temperatureData || !temperatureData.time) {
+        // 找到 "溫度" 的 WeatherElement
+        let temperatureData = locationData.WeatherElement.find(e => e.ElementName === "溫度");
+        if (!temperatureData) {
             console.error("❌ 無法找到溫度數據");
             return;
         }
 
         // 解析未來三天的溫度
-        let weatherResult = [];
-        for (let i = 0; i < 3; i++) {
-            let timeData = temperatureData.time[i];
-            let date = timeData.startTime.split(" ")[0]; // 取得日期
-            let temp = timeData.elementValue[0].value; // 取得溫度
-            weatherResult.push({ date, temp });
-        }
+        let weatherResult = {};
+        temperatureData.Time.forEach(timeData => {
+            let date = timeData.DataTime.split("T")[0]; // 取得日期
+            let temp = timeData.ElementValue[0].Temperature; // 取得溫度
+            if (!weatherResult[date]) {
+                weatherResult[date] = [];
+            }
+            weatherResult[date].push(parseInt(temp));
+        });
+
+        // // 取出每日的平均溫度
+        // let finalWeather = Object.keys(weatherResult).slice(0, 3).map(date => {
+        //     let avgTemp = weatherResult[date].reduce((sum, t) => sum + t, 0) / weatherResult[date].length;
+        //     return { date, temp: avgTemp.toFixed(1) };
+        // });
+
+        // // 顯示結果
+        // console.log("📅 未來三天北投區的溫度:");
+        // finalWeather.forEach(day => {
+        //     console.log(`${day.date}: ${day.temp}°C`);
+        // });
+
+        // 取出每日的最高溫 & 最低溫
+        let finalWeather = Object.keys(weatherResult).slice(0, 3).map(date => {
+            let maxTemp = Math.max(...weatherResult[date]); // 最高溫
+            let minTemp = Math.min(...weatherResult[date]); // 最低溫
+            return { date, maxTemp, minTemp };
+        });
+
+        // 構造顯示訊息
+        let weatherMessage = "📅 未來三天北投區的天氣：\n";
+        finalWeather.forEach(day => {
+            weatherMessage += `📆 ${day.date}\n🌡️ 最高溫: ${day.maxTemp}°C\n❄️ 最低溫: ${day.minTemp}°C\n\n`;
+        });
 
         // 顯示結果
-        console.log("📅 未來三天北投區的溫度:");
-        weatherResult.forEach(day => {
-            console.log(`${day.date}: ${day.temp}°C`);
-        });
+        alert(weatherMessage);
 
     } catch (error) {
         console.error("❌ 查詢天氣時發生錯誤:", error);
