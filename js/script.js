@@ -58,5 +58,41 @@ function getLocation() {
 // 取得地點資料
 getLocation();
 
-// 整頁PWA更新
+
+// PWA 程式更新
+function updatePWA() {
+    // if(!navigator.onLine){
+    //     document.getElementById('location-info').textContent = "目前為離線模式";                
+    //     return;
+    // }
+
+    if (!confirm("⚠️ 更新並重新啟動 PWA 嗎？")){
+        return;
+    }
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(registration => {
+            if (registration) {
+                registration.unregister().then(() => {
+                    caches.keys().then(cacheNames => {
+                        return Promise.all(
+                            cacheNames.map(cacheName => caches.delete(cacheName))
+                        );
+                    }).then(() => {
+                        // window.location.reload(true); // 確保強制重新載入最新版本
+                        window.location.href = "index.html";
+                    });
+                });
+            } else {
+                // window.location.reload(true);
+                window.location.href = "index.html";
+            }
+        });
+    } else {
+        // window.location.reload(true);
+        window.location.href = "index.html";
+    }
+}
+
+// 監聽 PWA 更新事件
 document.getElementById("updateBtn").addEventListener("click", updatePWA);

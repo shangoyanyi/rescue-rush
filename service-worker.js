@@ -14,9 +14,12 @@ const FILES_TO_CACHE = [
     "images/nana_2.png",
     "images/nana_3.png",
     "images/nana_4.png",
+    "js/modules/libs/google/index-min.js",
+    "js/modules/IndexedDBHelper.js",
     "js/dropdown.js",
     "js/nana.js",
-    "js/script.js"
+    "js/script.js",
+    "js/settings.js"
 ];
 
 // 安裝 Service Worker 並快取文件
