@@ -35,74 +35,66 @@ function testIdb() {
     saveFirebaseKey("test_fiebase_key");
     getFirebaseKey();
     deleteFirebaseKey();
+
+    alert("測試完成");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btn-idb").addEventListener("click", testIdb);
+    document.getElementById("btn-test-idb").addEventListener("click", testIdb);
 });
 
 
-
-// ✅ 從 IndexedDB 讀取 Firebase 設定並填入 `form1`
-async function loadFirebaseConfig() {
-    console.log('loadFirebaseConfig');
+// ✅ 從 IndexedDB 讀取 UserData 並填入 `form1`
+async function loadUserData() {
+    console.log('loadUserData');
 
     try {
-        const config = await db.get('settings', 'firebaseConfig');
+        const name = await db.get('userData', 'name');
+        const idNumber = await db.get('userData', 'idNumber');
+        const licensePlateNumber = await db.get('userData', 'licensePlateNumber');
 
         // ✅ 填入 `form1`
-        document.getElementById("apiKey").value = config.apiKey || "";
-        document.getElementById("authDomain").value = config.authDomain || "";
-        document.getElementById("projectId").value = config.projectId || "";
-        document.getElementById("storageBucket").value = config.storageBucket || "";
-        document.getElementById("messagingSenderId").value = config.messagingSenderId || "";
-        document.getElementById("appId").value = config.appId || "";
-        document.getElementById("measurementId").value = config.measurementId || "";
-        document.getElementById("vapidKey").value = config.vapidKey || "";
+        document.getElementById("name").value = name || "";
+        document.getElementById("idNumber").value = idNumber || "";
+        document.getElementById("licensePlateNumber").value = licensePlateNumber || "";
+        
 
-        console.log("✅ 讀取 Firebase 設定完成");
+        console.log("✅ 讀取 userData 完成");
 
     } catch (error) {
-        console.warn("⚠️ 找不到 Firebase 設定");
+        console.warn("⚠️ 找不到 userData");
     }
 }
 
 
-async function saveFirebaseConfig(e){
-    console.log('saveFirebaseConfig');
-
-    e.preventDefault();
+async function saveUserData(){
+    console.log('saveUserData');
 
     // 取得所有輸入框值
-    const firebaseConfig = {
-        apiKey: document.getElementById("apiKey").value.trim(),
-        authDomain: document.getElementById("authDomain").value.trim(),
-        projectId: document.getElementById("projectId").value.trim(),
-        storageBucket: document.getElementById("storageBucket").value.trim(),
-        messagingSenderId: document.getElementById("messagingSenderId").value.trim(),
-        appId: document.getElementById("appId").value.trim(),
-        measurementId: document.getElementById("measurementId").value.trim(),
-        vapidKey: document.getElementById("vapidKey").value.trim()
-    };
+    const name = document.getElementById("name").value.trim();
+    const idNumber = document.getElementById("idNumber").value.trim();
+    const licensePlateNumber = document.getElementById("licensePlateNumber").value.trim();
+
 
     try {
-        await db.set('settings', 'firebaseConfig', firebaseConfig);
-        console.log("✅ firebaseConfig 已存入 IndexedDB");        
-        alert("✅ Firebase 設定已儲存！");
+        await db.set('userData', 'name', name);
+        await db.set('userData', 'idNumber', idNumber);
+        await db.set('userData', 'licensePlateNumber', licensePlateNumber);
+        console.log("✅ userData 已存入 IndexedDB");        
+        alert("✅ userData 已儲存！");
 
     } catch (error) {
         console.error(error);
     }
 
-    loadFirebaseConfig();
-
+    window.location.reload(true);
 }
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btn-form1-submit").addEventListener("click", saveFirebaseConfig);
+    document.getElementById("btn-form1-submit").addEventListener("click", saveUserData);
 });
 
 
-loadFirebaseConfig();
+loadUserData();
 
