@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rescue Rush!</title>
-    
+
+        
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
 
@@ -16,6 +17,8 @@
 
     <link rel="stylesheet" href="css/settings.css">
     <script type="module" src="js/settings.js"></script>
+
+    <script type="module" src="js/modules/fcm.js" ></script>
 </head>
 <body>
     <!-- 極光效果 -->
@@ -56,11 +59,33 @@
 
     <div class="container">
         <div class="content-box">
-            <h2 class="section-title">設定</h2>
+            <h1>設定</h2>
 
-            <div><input type='button' value="測試indexedDB" id="testButton"></div>
+            <h2>測試indexedDB</h2>
+            <div><button id="btn-idb">測試indexedDB</button></div>            
 
-            
+            <hr>
+
+            <div id="form1">
+                <h3>firebaseConfig</h3>
+                <p>apiKey: <input type="text" placeholder="請輸入apiKey" value="" id="apiKey"></p>
+                <p>authDomain: <input type="text" placeholder="請輸入authDomain" value="" id="authDomain"></p>
+                <p>projectId: <input type="text" placeholder="請輸入projectId" value="" id="projectId"></p>
+                <p>storageBucket: <input type="text" placeholder="請輸入storageBucket" value="" id="storageBucket"></p>
+                <p>messagingSenderId: <input type="text" placeholder="請輸入messagingSenderId" value="" id="messagingSenderId"></p>
+                <p>appId: <input type="text" placeholder="請輸入appId" value="" id="appId"></p>
+                <p>measurementId: <input type="text" placeholder="請輸入measurementId" value="" id="measurementId"></p>
+                
+                <h3>firebase cloud messaging </h3>
+                <p>vapidKey: <input type="text" placeholder="請輸入vapidKey" value="" id="vapidKey"></p>
+
+                <button id="btn-form1-submit">儲存設定</button>
+            </div>
+
+            <hr>
+            <h2>FCM Token</h2>
+            <div><button id="btn-fcm">取得FCM Token</button></div>             
+            <div id="text-fcm-token"></div>
         </div>
         <div>&nbsp;</div>
         <div>&nbsp;</div>
