@@ -48,21 +48,22 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadUserData() {
     console.log('loadUserData');
 
+    const userData = await db.getAll('userData');
+    console.log("⚙️ 目前所有 userData:", userData);
+
     try {
-        const name = await db.get('userData', 'name');
-        const idNumber = await db.get('userData', 'idNumber');
-        const licensePlateNumber = await db.get('userData', 'licensePlateNumber');
+        const user = await db.get('userData', 1);        
 
         // ✅ 填入 `form1`
-        document.getElementById("name").value = name || "";
-        document.getElementById("idNumber").value = idNumber || "";
-        document.getElementById("licensePlateNumber").value = licensePlateNumber || "";
+        document.getElementById("name").value = user.name || "";
+        document.getElementById("idNumber").value = user.idNumber || "";
+        document.getElementById("licensePlateNumber").value = user.licensePlateNumber || "";
         
 
-        console.log("✅ 讀取 userData 完成");
+        console.log("✅ 讀取 user 完成");
 
     } catch (error) {
-        console.warn("⚠️ 找不到 userData");
+        console.warn("⚠️ 找不到 user");
     }
 }
 
@@ -75,19 +76,24 @@ async function saveUserData(){
     const idNumber = document.getElementById("idNumber").value.trim();
     const licensePlateNumber = document.getElementById("licensePlateNumber").value.trim();
 
+    const user = {
+        name: name,
+        idNumber: idNumber,
+        licensePlateNumber: licensePlateNumber
+    }
+    console.log("user:", user);
+    
 
     try {
-        await db.set('userData', 'name', name);
-        await db.set('userData', 'idNumber', idNumber);
-        await db.set('userData', 'licensePlateNumber', licensePlateNumber);
-        console.log("✅ userData 已存入 IndexedDB");        
-        alert("✅ userData 已儲存！");
+        await db.set('userData', 1, user);        
+        console.log("✅ user 已存入 IndexedDB");        
+        alert("✅ user 已儲存！");
 
     } catch (error) {
         console.error(error);
     }
 
-    window.location.reload(true);
+    //window.location.reload(true);
 }
 
 

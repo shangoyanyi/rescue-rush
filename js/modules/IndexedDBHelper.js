@@ -14,7 +14,7 @@ class IndexedDBHelper {
                     db.createObjectStore('settings', { keyPath: 'key' });
                 }
                 if (!db.objectStoreNames.contains('userData')) {
-                    db.createObjectStore('userData', { keyPath: 'id' });
+                    db.createObjectStore('userData', { keyPath: 'key' });
                 }
             }
         });
