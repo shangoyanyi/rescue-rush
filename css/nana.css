@@ -65,9 +65,10 @@
     width: 320px;    
     text-align: center;
     border-radius: 36px;
-    backdrop-filter: blur(15px); /* 毛玻璃效果 */
-    /* box-shadow: 0 2px 8px rgba(64, 64, 64, 1); */
+    backdrop-filter: blur(15px); /* 毛玻璃效果 */    
     color: white;
+    transform: translate(0, -10px);
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
 }
 /* 文字樣式 */
 .weather-card .card-title {
@@ -160,6 +161,10 @@
 
     opacity: 1;
     visibility: visible;
+    transform: translate(0, 0);
+}
+
+.overlay.show .weather-card{
     transform: translate(0, 0);
 }
 
