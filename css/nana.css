@@ -59,13 +59,13 @@
 }
 /* 天氣資訊卡片 */
 .weather-card {
-    background: rgba(255, 255, 255, 0.15); /* 半透明 */
+    background: rgba(0, 0, 0, 0.15); 
+    opacity: 0.6;
     padding: 5px;
     margin:5px;
     width: 320px;    
     text-align: center;
-    border-radius: 36px;
-    backdrop-filter: blur(15px); /* 毛玻璃效果 */    
+    border-radius: 32px;
     color: white;
     transform: translate(0, -10px);
     transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
@@ -76,7 +76,6 @@
     font-weight: bold;
     padding:0;
     margin:4px;
-    /* color: #2DD4BF; */
 }
 
 .weather-card .card-subtitle {
@@ -105,11 +104,6 @@
     background: white;
     border-radius: 10px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-    /* opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-    z-index: 1001;
-    display: none; */
     opacity: 0;
     visibility: hidden;
     transform: translate(10px, 0);
@@ -164,13 +158,23 @@
     transform: translate(0, 0);
 }
 
-.overlay.show .weather-card{
-    transform: translate(0, 0);
-}
-
 .overlay.show {
     /* display: block; */
 
     opacity: 1;
     visibility: visible;
+}
+
+/* 第一張卡片延遲 0.1s 再進場 */
+.overlay.show .weather-card:first-child {
+    transform: translate(0, 0);
+    opacity: 1;
+    transition-delay: 0.1s; /* ✅ 讓第一張延遲 0.1s */
+}
+
+/* 第二張卡片直接進場 */
+.overlay.show .weather-card:nth-child(2) {
+    transform: translate(0, 0);
+    opacity: 1;
+    
 }
