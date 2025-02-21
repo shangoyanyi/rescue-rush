@@ -31,14 +31,14 @@
         <!-- 氣溫顯示區塊 -->
         <div id="temperature-display" class="temperature-display">
             <div class="weather-card">
-                <p class="day">今日溫度</p>                
-                <hr>
-                <p class="temp" id="temp-today">${low} - ${high}</p>
+                <p class="card-title">今日氣溫</p>
+                <p class="card-subtitle"><span id="city-today">北投區</span>．<span id="date-today"></span></p>
+                <p class="card-content" id="temp-today">${low} - ${high}</p>
             </div>
             <div class="weather-card">
-                <p class="day">明日溫度</p>
-                <hr>                             
-                <p class="temp" id="temp-tomorrow">${low} - ${high}</p>
+                <p class="card-title">明日氣溫</p>
+                <p class="card-subtitle">北投區．<span id="date-tomorrow"></span></p>
+                <p class="card-content" id="temp-tomorrow">${low} - ${high}</p>
             </div>
         </div>
     </div>

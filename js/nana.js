@@ -117,11 +117,11 @@ async function showWeather() {
     console.log("showWeather");
     let weatherJson = await QueryWeather();
 
-    // document.getElementById("date-today").textContent = weatherJson.today.date;
-    document.getElementById("temp-today").textContent = weatherJson.today.minTemp + " - " + weatherJson.today.maxTemp;
+    document.getElementById("date-today").textContent = weatherJson.today.date;
+    document.getElementById("temp-today").textContent = weatherJson.today.minTemp + "°" + " - " + weatherJson.today.maxTemp + "°";
 
-    // document.getElementById("date-tomorrow").textContent = weatherJson.tomorrow.date;
-    document.getElementById("temp-tomorrow").textContent = weatherJson.tomorrow.minTemp + " - " + weatherJson.tomorrow.maxTemp;
+    document.getElementById("date-tomorrow").textContent = weatherJson.tomorrow.date;
+    document.getElementById("temp-tomorrow").textContent = weatherJson.tomorrow.minTemp + "°" + " - " + weatherJson.tomorrow.maxTemp + "°";
 }
 
 // 在 overlay 顯示結果
