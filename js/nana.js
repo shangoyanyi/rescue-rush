@@ -72,18 +72,6 @@ async function QueryWeather(){
             weatherResult[date].push(parseInt(temp));
         });
 
-        // // 取出每日的平均溫度
-        // let finalWeather = Object.keys(weatherResult).slice(0, 3).map(date => {
-        //     let avgTemp = weatherResult[date].reduce((sum, t) => sum + t, 0) / weatherResult[date].length;
-        //     return { date, temp: avgTemp.toFixed(1) };
-        // });
-
-        // // 顯示結果
-        // console.log("📅 未來三天北投區的溫度:");
-        // finalWeather.forEach(day => {
-        //     console.log(`${day.date}: ${day.temp}°C`);
-        // });
-
         // 取出每日的最高溫 & 最低溫
         let finalWeather = Object.keys(weatherResult).slice(0, 3).map(date => {
             let maxTemp = Math.max(...weatherResult[date]); // 最高溫
@@ -91,17 +79,50 @@ async function QueryWeather(){
             return { date, maxTemp, minTemp };
         });
 
-        // 構造顯示訊息
-        let weatherMessage = "📅 未來三天北投區的天氣：\n";
-        finalWeather.forEach(day => {
-            weatherMessage += `📆 ${day.date}\n🌡️ 最高溫: ${day.maxTemp}°C\n❄️ 最低溫: ${day.minTemp}°C\n\n`;
-        });
+        // 轉換成 JSON 物件
+        let weatherJson = {
+            today: {
+                date: finalWeather[0]?.date || "N/A",
+                minTemp: finalWeather[0]?.minTemp || "N/A",
+                maxTemp: finalWeather[0]?.maxTemp || "N/A"
+            },
+            tomorrow: {
+                date: finalWeather[1]?.date || "N/A",
+                minTemp: finalWeather[1]?.minTemp || "N/A",
+                maxTemp: finalWeather[1]?.maxTemp || "N/A"
+            }
+        };
 
-        // 顯示結果
-        alert(weatherMessage);
+        console.log(weatherJson);
+        return weatherJson;
+
+        // // 構造顯示訊息
+        // let weatherMessage = "📅 未來三天北投區的天氣：\n";
+        // finalWeather.forEach(day => {
+        //     weatherMessage += `📆 ${day.date}\n🌡️ 最高溫: ${day.maxTemp}°C\n❄️ 最低溫: ${day.minTemp}°C\n\n`;
+        // });
+
+        // // 顯示結果
+        // alert(weatherMessage);
+
 
     } catch (error) {
         console.error("❌ 查詢天氣時發生錯誤:", error);
+        alert("❌ 查詢天氣時發生錯誤:", error);
     }
-
 }
+
+
+async function showWeather() {
+    console.log("showWeather");
+    let weatherJson = await QueryWeather();
+
+    // document.getElementById("date-today").textContent = weatherJson.today.date;
+    document.getElementById("temp-today").textContent = weatherJson.today.minTemp + " - " + weatherJson.today.maxTemp;
+
+    // document.getElementById("date-tomorrow").textContent = weatherJson.tomorrow.date;
+    document.getElementById("temp-tomorrow").textContent = weatherJson.tomorrow.minTemp + " - " + weatherJson.tomorrow.maxTemp;
+}
+
+// 在 overlay 顯示結果
+showWeather();

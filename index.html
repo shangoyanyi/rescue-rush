@@ -29,18 +29,33 @@
     <div class="floating-icon" onclick="toggleChat()"></div>
 
     <!-- 半透明黑色遮罩 -->
-    <div class="overlay" onclick="toggleChat()"></div>
+    <div id="overlay" class="overlay" onclick="toggleChat()">
+        <!-- 氣溫顯示區塊 -->
+        <div id="temperature-display" class="temperature-display">
+            <div class="weather-card">
+                <p class="day">今日溫度</p>                
+                <hr>
+                <p class="temp" id="temp-today">${low} - ${high}</p>
+            </div>
+            <div class="weather-card">
+                <p class="day">明日溫度</p>
+                <hr>                             
+                <p class="temp" id="temp-tomorrow">${low} - ${high}</p>
+            </div>
+        </div>
+    </div>
 
     <!-- 對話框選單 -->
     <div class="chatbox">
-        <div class="chat-header">👋 Hi! 我是 Nana</div>
-        <ul class="chat-options">
-            <li onclick="handleOption('home')">首頁</li>
-            <li onclick="handleOption('weather')">查詢天氣</li>
-            <li onclick="handleOption('settings')">PWA設定</li>
-            <li onclick="updatePWA()">更新PWA</li>
-            <li onclick="toggleChat()">❌ 關閉</li>
-        </ul>
+        <div class="chat-header"> Hi! 今天想要做什麼呢?</div>
+        <div class="chat-body">
+            <ul class="chat-options">
+                <li onclick="handleOption('home')">首頁</li>
+                <li onclick="handleOption('settings')">PWA設定</li>
+                <li onclick="updatePWA()">更新PWA</li>
+                <li onclick="toggleChat()">❌ 關閉</li>
+            </ul>
+        </div>
     </div>
 
 
@@ -108,19 +123,10 @@
             </ul>
         </div>
 
-        <!-- <div class="tabs">
-            <button class="tab-button active" onclick="switchTab('esun')">玉山銀行</button>
-            <button class="tab-button" onclick="switchTab('ctbc')">中國信託</button>            
-        </div>         -->
         
         <div class="content-box">
             <!-- 玉山銀行 -->
             <div id="esun" class="tab-content active">
-                <!-- <div style="display:flex;">
-                    <image src="images/logo-esun.png" class="section-logo"></image>
-                    <h2 class="section-title">玉山銀行 - UBear</h2> 
-                </div> -->
-
                 <p><b>救援項目</b></p>
                 <ul>
                     <li>拖吊(50公里內免費，超過每公里加收 60 元; 高速公路作業費用基本起拖1500內免費，超過由持卡人自付)</li>

@@ -24,7 +24,7 @@
     bottom: 20px;
     width: 60px;  /* 比 icon 大，讓光影擴散 */
     height: 60px;
-    background: linear-gradient(to right, rgba(45, 212, 191, 0.8), rgba(59, 130, 246, 0.4));
+    background: linear-gradient(45deg, rgba(45, 212, 191, 0.8), rgba(59, 130, 246, 0.4));
     border-radius: 50%;
     filter: blur(1px);  /* 柔和光影 */
     opacity: 0.7;
@@ -40,35 +40,96 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 900;
+    backdrop-filter: blur(8px); /* 毛玻璃效果 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 999;
+    /* display: none; */    
 }
+
+/* === 氣溫顯示區塊 === */
+.temperature-display {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* display: flex;
+    gap: 10px; */
+}
+/* 天氣資訊卡片 */
+.weather-card {
+    background: rgba(255, 255, 255, 0.1); /* 半透明 */
+    padding: 5px;
+    margin:5px;
+    width: 320px;    
+    text-align: center;
+    border-radius: 8px;
+    backdrop-filter: blur(12px); /* 毛玻璃效果 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+/* 文字樣式 */
+.weather-card .day {
+    font-size: 24px;
+    font-weight: bold;
+    padding:0;
+    margin:8px;
+    /* color: #2DD4BF; */
+}
+.weather-card .date {
+    font-size: 16px;
+    padding:0;
+    margin:0;
+}
+.weather-card .temp {
+    font-size: 60px;    
+    padding:0;
+    margin:8px;
+}
+.weather-card hr {
+    border: 1px solid #777;
+}
+
 
 /* === 對話框樣式的選單 === */
 .chatbox {
     position: fixed;
     right: 90px;
     bottom: 30px;
-    width: 200px;
+    width:50%;
+    min-width:260px;
+    max-width: 380px;
     background: white;
     border-radius: 10px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-    opacity: 0;
+    /* opacity: 0;
     transform: translateX(20px);
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
     z-index: 1001;
-    display: none;
+    display: none; */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(10px, 0);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 1001;
 }
 
 /* === 選單標題 === */
 .chat-header {
-    background: #4CAF50;
+    background: #2DD4BF;
     color: white;
     padding: 10px;
     font-weight: bold;
     text-align: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+/* === 選單內容 === */
+.chat-body {    
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 /* === 選單內的按鈕選項 === */
@@ -92,11 +153,18 @@
 
 /* === 顯示對話框時的 class === */
 .chatbox.show {
-    opacity: 1;
+    /* opacity: 1;
     transform: translateX(0);
-    display: block;
+    display: block; */
+
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0);
 }
 
 .overlay.show {
-    display: block;
+    /* display: block; */
+
+    opacity: 1;
+    visibility: visible;
 }

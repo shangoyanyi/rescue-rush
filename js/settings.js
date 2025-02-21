@@ -52,7 +52,7 @@ async function loadUserData() {
     console.log("⚙️ 目前所有 userData:", userData);
 
     try {
-        const user = await db.get('userData', 1);        
+        const user = await db.get('userData', "user1");        
 
         // ✅ 填入 `form1`
         document.getElementById("name").value = user.name || "";
@@ -85,7 +85,7 @@ async function saveUserData(){
     
 
     try {
-        await db.set('userData', 1, user);        
+        await db.set('userData', "user1", user);        
         console.log("✅ user 已存入 IndexedDB");        
         alert("✅ user 已儲存！");
 
