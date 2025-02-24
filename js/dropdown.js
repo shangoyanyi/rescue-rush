@@ -6,21 +6,6 @@ function toggleDropdown() {
     header.classList.toggle("active");
 }
 
-// async function loadBanksData() {
-//     try {
-//         const response = await fetch('banks.json'); // 讀取 JSON 檔案
-//         if (!response.ok) throw new Error("載入 JSON 失敗");
-        
-//         const banks = await response.json(); // 解析 JSON 成 JS 物件
-//         console.log("成功讀取銀行資料:", banks); // 測試輸出
-
-//         return banks;
-//     } catch (error) {
-//         console.error("讀取 banks.json 失敗:", error);
-//         return [];
-//     }
-// }
-
 function switchTab(tabId) {    
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -30,18 +15,18 @@ function switchTab(tabId) {
 
 
 function selectBank(bankId) {
-    let banks = [
-        {
-            "id": "esun",
-            "name": "玉山銀行",
-            "logo": "images/logo-esun.png"        
-        },
-        {
-            "id": "ctbc",
-            "name": "中國信託",
-            "logo": "images/logo-ctbc.png"        
-        }
-    ];
+    // let banks = [
+    //     {
+    //         "id": "esun",
+    //         "name": "玉山銀行",
+    //         "logo": "images/logo-esun.png"        
+    //     },
+    //     {
+    //         "id": "ctbc",
+    //         "name": "中國信託",
+    //         "logo": "images/logo-ctbc.png"        
+    //     }
+    // ];
 
 
     let bank = banks.find(bank => bank.id === bankId) || null;
@@ -55,3 +40,46 @@ function selectBank(bankId) {
 }
 
 
+function initDropdownList(){
+    // 依據banks新增dropdown list內選項
+    const dropdownList = document.getElementById("dropdown-list-banks");
+    const template = document.getElementById("dropdown-item-template").content;
+
+    // 清空舊內容，避免重複渲染
+    dropdownList.innerHTML = "";
+
+    // 動態生成 `li`
+    banks.forEach(bank => {
+        const clone = document.importNode(template, true); // 複製 `template`
+
+        // 設定銀行 Logo
+        const img = clone.querySelector(".bank-logo");
+        img.src = bank.logo;
+        img.alt = `${bank.name} Logo`;
+
+        // 設定銀行名稱
+        clone.querySelector(".bank-name").textContent = bank.name;
+
+        // 設定 `onclick` 事件
+        clone.querySelector("li").setAttribute("onclick", `selectBank('${bank.id}')`);
+
+        // 插入 `dropdown-list`
+        dropdownList.appendChild(clone);
+    });
+}
+
+
+let banks = [
+    {
+        "id": "esun",
+        "name": "玉山銀行",
+        "logo": "images/logo-esun.png"        
+    },
+    {
+        "id": "ctbc",
+        "name": "中國信託",
+        "logo": "images/logo-ctbc.png"        
+    }
+];
+
+initDropdownList();

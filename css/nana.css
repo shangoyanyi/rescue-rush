@@ -45,7 +45,6 @@
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     z-index: 999;
-    /* display: none; */    
 }
 .overlay-link {
     color:#fff; 
@@ -56,6 +55,7 @@
 .overlay-link:hover {
     cursor: pointer;
 }
+
 
 /* === 氣溫顯示區塊 === */
 .temperature-display {
@@ -158,18 +158,12 @@
 
 /* === 顯示對話框時的 class === */
 .chatbox.show {
-    /* opacity: 1;
-    transform: translateX(0);
-    display: block; */
-
     opacity: 1;
     visibility: visible;
     transform: translate(0, 0);
 }
 
-.overlay.show {
-    /* display: block; */
-
+.overlay.show {    
     opacity: 1;
     visibility: visible;
 }

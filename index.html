@@ -89,40 +89,24 @@
                 <span class="dropdown-icon"><img src="images/angle-down-solid.svg"></span>                
             </div>
         
-            <ul class="dropdown-list">
-                <li onclick="selectBank('esun')">
+            <ul class="dropdown-list" id="dropdown-list-banks">
+                <!-- <li onclick="selectBank('esun')">
                     <img src="images/logo-esun.png" alt="Bank Logo" class="bank-logo">
                     玉山銀行
                 </li>
                 <li onclick="selectBank('ctbc')">
                     <img src="images/logo-ctbc.png" alt="Bank Logo" class="bank-logo">
                     中國信託
-                </li>
-                <li onclick="selectBank('esun')">
-                    <img src="images/logo-esun.png" alt="Bank Logo" class="bank-logo">
-                    玉山銀行
-                </li>
-                <li onclick="selectBank('ctbc')">
-                    <img src="images/logo-ctbc.png" alt="Bank Logo" class="bank-logo">
-                    中國信託
-                </li>
-                <li onclick="selectBank('esun')">
-                    <img src="images/logo-esun.png" alt="Bank Logo" class="bank-logo">
-                    玉山銀行
-                </li>
-                <li onclick="selectBank('ctbc')">
-                    <img src="images/logo-ctbc.png" alt="Bank Logo" class="bank-logo">
-                    中國信託
-                </li>
-                <li onclick="selectBank('esun')">
-                    <img src="images/logo-esun.png" alt="Bank Logo" class="bank-logo">
-                    玉山銀行
-                </li>
-                <li onclick="selectBank('ctbc')">
-                    <img src="images/logo-ctbc.png" alt="Bank Logo" class="bank-logo">
-                    中國信託
-                </li>
+                </li>                 -->
             </ul>
+
+            <!-- 🔹 定義 <li> 樣板 -->
+            <template id="dropdown-item-template">
+                <li>
+                    <img src="" alt="Bank Logo" class="bank-logo">
+                    <span class="bank-name"></span>
+                </li>
+            </template>
         </div>
 
         
