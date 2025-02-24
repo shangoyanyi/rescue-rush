@@ -47,6 +47,15 @@
     z-index: 999;
     /* display: none; */    
 }
+.overlay-link {
+    color:#fff; 
+    text-decoration: none;
+    margin-top:16px;
+    text-align:center;
+}
+.overlay-link:hover {
+    cursor: pointer;
+}
 
 /* === 氣溫顯示區塊 === */
 .temperature-display {
