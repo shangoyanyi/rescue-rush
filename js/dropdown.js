@@ -6,6 +6,7 @@ function toggleDropdown() {
     header.classList.toggle("active");
 }
 
+
 function switchTab(tabId) {    
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -15,28 +16,17 @@ function switchTab(tabId) {
 
 
 function selectBank(bankId) {
-    // let banks = [
-    //     {
-    //         "id": "esun",
-    //         "name": "玉山銀行",
-    //         "logo": "images/logo-esun.png"        
-    //     },
-    //     {
-    //         "id": "ctbc",
-    //         "name": "中國信託",
-    //         "logo": "images/logo-ctbc.png"        
-    //     }
-    // ];
-
-
     let bank = banks.find(bank => bank.id === bankId) || null;
 
+    // 更新 dropdown header
     document.querySelector(".bank-logo").src = bank.logo;
     document.querySelector(".selected-bank").textContent = bank.name;
-    switchTab(bank.id);
-
-    toggleDropdown();
     
+    // 切換 tab 內容
+    switchTab(bank.id);
+    
+    // 關閉 dropdown
+    toggleDropdown();
 }
 
 

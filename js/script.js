@@ -1,26 +1,19 @@
-function switchTab(tabName) {
-    document.querySelectorAll('.tab-button').forEach(button => {
-        button.classList.remove('active');
-    });
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-
-    document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
-    document.getElementById(tabName).classList.add('active');
-}
-
+// func: call 救援電話
 function callRescue(phoneNumber) {
     window.location.href = `tel:${phoneNumber}`;
 }
 
-
-
+// func: 取得地點
 function getLocation() {
     const locationInfo = document.getElementById('location-info');
 
     if (!navigator.geolocation) {
         locationInfo.textContent = "瀏覽器不支援查詢位置";
+        return;
+    }
+
+    if(!navigator.onLine){
+        locationInfo.textContent = "目前為離線模式";                
         return;
     }
 
@@ -55,17 +48,8 @@ function getLocation() {
     );
 }
 
-// 取得地點資料
-getLocation();
-
-
-// PWA 程式更新
+// func: PWA 程式更新
 function updatePWA() {
-    // if(!navigator.onLine){
-    //     document.getElementById('location-info').textContent = "目前為離線模式";                
-    //     return;
-    // }
-
     if (!confirm("⚠️ 更新並重新啟動 PWA 嗎？")){
         return;
     }
@@ -94,5 +78,17 @@ function updatePWA() {
     }
 }
 
-// 監聽 PWA 更新事件
-document.getElementById("updateBtn").addEventListener("click", updatePWA);
+
+/* ==== js 進入點 ==== */
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("✅ DOM 加載完成，初始化 PWA...");
+
+    // 資料初始化
+    // 取得所在地點資料
+    getLocation();
+    
+    // 事件監聽
+    // PWA 更新按鈕點擊事件
+    document.getElementById("updateBtn").addEventListener("click", updatePWA);
+});
+

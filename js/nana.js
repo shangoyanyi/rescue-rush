@@ -28,6 +28,10 @@ function handleOption(option) {
         QueryWeather();
     }
 
+    if('sayhi'==option){
+        nanaSpeak("嗨！我是 Nana，你需要什麼幫助嗎？");
+    }
+
     toggleChat(); // 選擇後關閉選單
 }
 
@@ -126,3 +130,20 @@ async function showWeather() {
 
 // 在 overlay 顯示結果
 showWeather();
+
+
+
+
+function nanaSpeak(text) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    utterance.lang = "zh-TW"; // ✅ 設定中文
+    utterance.voice = synth.getVoices().find(voice => voice.name.includes("Mei-Jia")); // ✅ 選擇台灣語音 (若支援)
+    utterance.pitch = 2; // ✅ 聲調 (0 ~ 2)
+    utterance.rate = 3;  // ✅ 語速 (0.1 ~ 10)
+    utterance.volume = 1; // ✅ 音量 (0 ~ 1)
+
+    synth.speak(utterance);
+}
+
