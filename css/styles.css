@@ -103,6 +103,18 @@ body {
     color: white;
 }
 
+
+.content-box-loading {
+    display: none;
+    text-align:center;
+}
+.content-box-loading.show {
+    display: block;
+}
+.content-box-loading img {
+    width:60%;    
+}
+
 .content-box {
     /* background: #ffffff;
     border-radius: 15px; */

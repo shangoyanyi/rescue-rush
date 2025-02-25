@@ -6,11 +6,20 @@ function toggleDropdown() {
     header.classList.toggle("active");
 }
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-function switchTab(tabId) {    
+async function switchTab(tabId) {    
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
+
+    // 增加 loading 動畫效果
+    document.getElementById("content-box-loading").classList.add('show');
+    await delay(600);
+    document.getElementById("content-box-loading").classList.remove('show');
+
     document.getElementById(tabId).classList.add('active');
 }
 
