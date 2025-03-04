@@ -44,50 +44,46 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ✅ 從 IndexedDB 讀取 UserData 並填入 `form1`
-async function loadUserData() {
-    console.log('loadUserData');
+// ✅ 從 IndexedDB 讀取 loadFCMSettings 並填入 `form1`
+async function loadFCMSettings() {
+    console.log('loadFCMSettings');
 
-    const userData = await db.getAll('userData');
-    console.log("⚙️ 目前所有 userData:", userData);
+    const settings = await db.getAll('settings');
+    console.log("⚙️ 目前所有 settings:", settings);
 
     try {
-        const user = await db.get('userData', "user1");        
+        const firebaseConfigJSONString = await db.get('settings', "firebaseConfigJSONString");
+        const vapidKey = await db.get('settings', "vapidKey");
 
         // ✅ 填入 `form1`
-        document.getElementById("name").value = user.name || "";
-        document.getElementById("idNumber").value = user.idNumber || "";
-        document.getElementById("licensePlateNumber").value = user.licensePlateNumber || "";
-        
+        document.getElementById("firebaseConfigJSONString").value = firebaseConfigJSONString || "";
+        document.getElementById("vapidKey").value = vapidKey || "";
 
-        console.log("✅ 讀取 user 完成");
+        console.log("✅ loadFCMSettings 完成");
 
     } catch (error) {
-        console.warn("⚠️ 找不到 user");
+        console.warn("⚠️ loadFCMSettings error");
     }
 }
 
 
-async function saveUserData(){
-    console.log('saveUserData');
+async function saveFCMSettings(){
+    console.log('saveFCMSettings');
 
     // 取得所有輸入框值
-    const name = document.getElementById("name").value.trim();
-    const idNumber = document.getElementById("idNumber").value.trim();
-    const licensePlateNumber = document.getElementById("licensePlateNumber").value.trim();
-
-    const user = {
-        name: name,
-        idNumber: idNumber,
-        licensePlateNumber: licensePlateNumber
-    }
-    console.log("user:", user);
+    const firebaseConfigJSONString = document.getElementById("firebaseConfigJSONString").value.trim();
+    const vapidKey = document.getElementById("vapidKey").value.trim();
+    
+    console.log("firebaseConfigJSONString:", firebaseConfigJSONString);
+    console.log("vapidKey:", vapidKey);
     
 
     try {
-        await db.set('userData', "user1", user);        
-        console.log("✅ user 已存入 IndexedDB");        
-        alert("✅ user 已儲存！");
+        await db.set('settings', "firebaseConfigJSONString", firebaseConfigJSONString);        
+        console.log("✅ firebaseConfigJSONString 已存入 IndexedDB");
+
+        await db.set('settings', "vapidKey", vapidKey);        
+        console.log("✅ vapidKey 已存入 IndexedDB");
 
     } catch (error) {
         console.error(error);
@@ -98,9 +94,9 @@ async function saveUserData(){
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btn-form1-submit").addEventListener("click", saveUserData);
+    document.getElementById("btn-form1-submit").addEventListener("click", saveFCMSettings);
 });
 
 
-loadUserData();
+loadFCMSettings();
 

@@ -79,6 +79,11 @@ function updatePWA() {
 }
 
 
+function initFirebase(){
+    
+}
+
+
 /* ==== js 進入點 ==== */
 document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ DOM 加載完成，初始化 PWA...");
@@ -90,5 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 事件監聽
     // PWA 更新按鈕點擊事件
     document.getElementById("updateBtn").addEventListener("click", updatePWA);
+
+    // 初始化 firebase (fcm 功能)
+    initFirebase();
 });
 
