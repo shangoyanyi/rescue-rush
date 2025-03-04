@@ -46,6 +46,13 @@ async function initFirebase() {
   return true;
 }
 
+// *** 取得 messagingObject ***
+async function getMessagingObject() {
+  return messaging;
+}
+
+
+
 // *** 取得 FCM Token ***
 async function getFCMToken() {
   try {
@@ -75,7 +82,7 @@ async function getFCMToken() {
   }
 }
 
-// *** 註冊前景推播監聽 ***
+// *** 註冊前景推播監聽 (sample code) ***
 function registerOnMessageHandler() {
   if (!messaging) {
     console.warn("⚠️ Firebase Messaging 尚未初始化");
@@ -85,12 +92,9 @@ function registerOnMessageHandler() {
   console.log("📩 註冊前景推播監聽...");
   onMessage(messaging, (payload) => {
     console.log('📩 收到前景推播:', payload);
-    new Notification(payload.notification.title, {
-      body: payload.notification.body,
-      icon: "/images/logo.png",
-    });
+    alert("📩 收到推播訊息", JSON.stringify(payload));
   });
 }
 
 // *** 模組導出 ***
-export { initFirebase, getFCMToken, registerOnMessageHandler };
+export { initFirebase, getMessagingObject, getFCMToken };

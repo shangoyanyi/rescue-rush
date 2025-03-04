@@ -39,3 +39,28 @@ self.addEventListener("fetch", event => {
         })
     );
 });
+
+// 接收推播通知
+self.addEventListener("push", function(event) {
+    console.log("📩 收到背景推播事件", event);
+    
+    let payload;
+    try {
+        // 嘗試解析 JSON，如果失敗，則當作純文字處理
+        payload = event.data ? event.data.json() : { notification: { title: "未知通知", body: "內容解析失敗" }};
+    } catch (error) {
+        console.warn("⚠️ 無法解析推播內容，改用純文字模式:", error);
+        payload = { notification: { title: "通知", body: event.data.text() }};
+    }
+
+    console.log("📩 推播通知內容:", payload);
+
+    const options = {
+        body: payload.notification.body,
+        icon: "/images/logo.png",
+    };
+
+    event.waitUntil(
+        self.registration.showNotification(payload.notification.title, options)
+    );
+});

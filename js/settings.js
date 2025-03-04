@@ -1,5 +1,6 @@
+import {onMessage } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
 import db from './modules/IndexedDBHelper.js';
-import { initFirebase, getFCMToken, registerOnMessageHandler } from './modules/fcm.js';
+import { initFirebase, getMessagingObject, getFCMToken } from './modules/fcm.js';
 
 async function saveFirebaseKey(userApiKey) {
     await db.set('settings', 'firebaseApiKey', userApiKey);
@@ -28,15 +29,11 @@ async function deleteFirebaseKey() {
     console.log("🗑️ 已刪除 Firebase API Key");
 }
 
-console.log('hi');
-
-getAllSettings();
-
 function testIdb() {
+    getAllSettings();
     saveFirebaseKey("test_fiebase_key");
     getFirebaseKey();
     deleteFirebaseKey();
-
     alert("測試完成");
 }
 
@@ -91,8 +88,6 @@ async function saveFCMSettings(){
     } catch (error) {
         console.error(error);
     }
-
-    //window.location.reload(true);
 }
 
 // ✅ 取得 FCM Token 並註冊推播監聽
@@ -115,8 +110,18 @@ async function getFCMTokenEventHandler(){
           return;
         }
     
-        console.log("✅ 取得 FCM Token 成功，註冊推播監聽...");
-        registerOnMessageHandler();
+
+        console.log("✅ 取得 FCM Token 成功，註冊推播監聽...");        
+        const messaging = await getMessagingObject();
+        if (!messaging) {
+            console.warn("⚠️ Firebase Messaging 尚未初始化");
+            return;
+        }
+
+        onMessage(messaging, (payload) => {
+            console.log("📩 收到推播訊息:", payload);
+            alert("📩 收到推播訊息", JSON.stringify(payload));
+        });        
         console.log("✅ 註冊推播監聽完成");
 
     } catch (error) {
@@ -124,6 +129,8 @@ async function getFCMTokenEventHandler(){
         alert("❌ 主執行邏輯錯誤", error);
     }
 }
+
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
