@@ -1,5 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+// import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
+import { initializeApp } from "./libs/firebase-app.js";
+import { getMessaging, getToken, onMessage } from "./libs/firebase-messaging.js";
 import db from './IndexedDBHelper.js';
 
 
