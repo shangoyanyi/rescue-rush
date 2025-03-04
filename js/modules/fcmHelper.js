@@ -125,33 +125,13 @@ async function getFCMToken() {
           return fcmToken;          
         }
         console.log("fcmToken 不存在，重新取得...");
-
-
-        // Initialize Firebase
-        // console.log("初始化 firebase...");
-        // const firebaseConfig = await getFirebaseConfigFromIdb();
-        // console.log("firebaseConfig:", firebaseConfig);
-        // if(!firebaseConfig){
-        //   console.warn("firebaseConfig is NULL");
-        //   return;
-        // }
-
-        // const vapidKey = await getVapidKeyFromIdb();
-        // console.log("vapidKey:", vapidKey);
-        // if(!vapidKey){
-        //   console.warn("vapidKey is NULL");
-        //   return;
-        // }
         
-        // const app = initializeApp(firebaseConfig);
-        // const messaging = getMessaging(app);
-        // console.log("firebase初始化完成");
-
 
         //get fcm token        
         console.log("📢 請求 FCM Token...");
         const registration = await navigator.serviceWorker.ready;
         const token = await getToken(messaging, { vapidKey: vapidKey, serviceWorkerRegistration: registration });
+        console.log("registration:", registration);
 
         if (token) {
             console.log("✅ 取得 FCM Token:", token);
