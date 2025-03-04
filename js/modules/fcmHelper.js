@@ -1,10 +1,5 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
-
+import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
 import db from './IndexedDBHelper.js';
 
 
@@ -56,8 +51,6 @@ async function saveVapidKeytoIdb(vapidKey) {
 }
 
 
-
-
 // // Your web app's Firebase configuration
 // // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // const firebaseConfig = {
@@ -73,11 +66,38 @@ async function saveVapidKeytoIdb(vapidKey) {
 // let vapidKey = "<YOUR-VAPID-KEY>";
 
 
-// // Initialize Firebase
+// Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 // const messaging = getMessaging(app);
 
+let firebaseConfig = null;
+let vapidKey = null;
+let app = null;
+let messaging = null;
 
+// *** 初始化 Firebase ***
+async function initFirebase() {
+  console.log("初始化 firebase...");
+  firebaseConfig = await getFirebaseConfigFromIdb();
+  console.log("firebaseConfig:", firebaseConfig);
+  if(!firebaseConfig){
+    console.warn("firebaseConfig is NULL");
+    return false;
+  }
+
+  vapidKey = await getVapidKeyFromIdb();
+  console.log("vapidKey:", vapidKey);
+  if(!vapidKey){
+    console.warn("vapidKey is NULL");
+    return false;
+  }
+  
+  app = initializeApp(firebaseConfig);
+  messaging = getMessaging(app);
+  console.log("firebase初始化完成");
+
+  return true;
+}
 
 // *** 取得 FCM Token ***
 // 檢查 idb 內是否已有 FCM Token
@@ -108,24 +128,24 @@ async function getFCMToken() {
 
 
         // Initialize Firebase
-        console.log("初始化 firebase...");
-        const firebaseConfig = await getFirebaseConfigFromIdb();
-        console.log("firebaseConfig:", firebaseConfig);
-        if(!firebaseConfig){
-          console.warn("firebaseConfig is NULL");
-          return;
-        }
+        // console.log("初始化 firebase...");
+        // const firebaseConfig = await getFirebaseConfigFromIdb();
+        // console.log("firebaseConfig:", firebaseConfig);
+        // if(!firebaseConfig){
+        //   console.warn("firebaseConfig is NULL");
+        //   return;
+        // }
 
-        const vapidKey = await getVapidKeyFromIdb();
-        console.log("vapidKey:", vapidKey);
-        if(!vapidKey){
-          console.warn("vapidKey is NULL");
-          return;
-        }
+        // const vapidKey = await getVapidKeyFromIdb();
+        // console.log("vapidKey:", vapidKey);
+        // if(!vapidKey){
+        //   console.warn("vapidKey is NULL");
+        //   return;
+        // }
         
-        const app = initializeApp(firebaseConfig);
-        const messaging = getMessaging(app);
-        console.log("firebase初始化完成");
+        // const app = initializeApp(firebaseConfig);
+        // const messaging = getMessaging(app);
+        // console.log("firebase初始化完成");
 
 
         //get fcm token        
@@ -154,5 +174,47 @@ async function getFCMToken() {
     }
 }
 
+// *** 註冊 onMessage 事件 ***
+// 請求通知權限
+function registerOnMessageHandler(){
+  if (!messaging) {
+    console.warn("⚠️ messaging 尚未初始化，無法註冊 onMessage 事件");
+    return;
+  }
+  
+  console.log("📩 註冊前景推播監聽...");
+  onMessage(messaging, (payload) => {
+    console.log('Message received. ', payload);
+    new Notification(payload.notification.title, {
+      body: payload.notification.body,
+      icon: "/images/logo.png",
+    });
+  });
+};
 
-getFCMToken();
+
+// *** 🚀 主執行邏輯 ***
+async function main() {
+  try {
+      const firebaseInitialized = await initFirebase();
+      if (!firebaseInitialized) {
+          console.error("❌ Firebase 初始化失敗，終止程序");
+          return;
+      }
+
+      console.log("✅ Firebase 初始化成功，開始取得 FCM Token...");
+      const fcmToken = await getFCMToken();
+      if (!fcmToken) {
+          console.error("❌ 取得 FCM Token 失敗");
+          return;
+      }
+
+      console.log("✅ 取得 FCM Token 成功，註冊推播監聽...");
+      registerOnMessageHandler();      
+  } catch (error) {
+      console.error("❌ 程式運行時發生錯誤:", error);
+  }
+}
+
+// 🚀 執行 `main` 初始化 FCM
+main();

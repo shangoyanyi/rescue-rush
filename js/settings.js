@@ -54,10 +54,12 @@ async function loadFCMSettings() {
     try {
         const firebaseConfigJSONString = await db.get('settings', "firebaseConfigJSONString");
         const vapidKey = await db.get('settings', "vapidKey");
+        const fcmToken = await db.get('settings', "fcmToken");
 
         // ✅ 填入 `form1`
         document.getElementById("firebaseConfigJSONString").value = firebaseConfigJSONString || "";
         document.getElementById("vapidKey").value = vapidKey || "";
+        document.getElementById("fcmToken").textContent = fcmToken || "";
 
         console.log("✅ loadFCMSettings 完成");
 
