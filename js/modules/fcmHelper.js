@@ -125,7 +125,7 @@ async function getFCMToken() {
           return fcmToken;          
         }
         console.log("fcmToken 不存在，重新取得...");
-        
+
 
         //get fcm token        
         console.log("📢 請求 FCM Token...");
@@ -180,6 +180,7 @@ async function main() {
       const firebaseInitialized = await initFirebase();
       if (!firebaseInitialized) {
           console.error("❌ Firebase 初始化失敗，終止程序");
+          alert("❌ Firebase 初始化失敗，終止程序", error);
           return;
       }
 
@@ -187,6 +188,7 @@ async function main() {
       const fcmToken = await getFCMToken();
       if (!fcmToken) {
           console.error("❌ 取得 FCM Token 失敗");
+          alert("❌ 取得 FCM Token 失敗", error);
           return;
       }
 
@@ -194,6 +196,7 @@ async function main() {
       registerOnMessageHandler();      
   } catch (error) {
       console.error("❌ 程式運行時發生錯誤:", error);
+      alert("❌ 程式運行時發生錯誤", error);
   }
 }
 
