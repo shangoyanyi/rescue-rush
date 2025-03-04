@@ -190,6 +190,7 @@ function registerOnMessageHandler(){
       icon: "/images/logo.png",
     });
   });
+  console.log("前景推播監聽中...");
 };
 
 
