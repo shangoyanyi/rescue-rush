@@ -119,10 +119,6 @@ async function getFCMTokenEventHandler(){
         registerOnMessageHandler();
         console.log("✅ 註冊推播監聽完成");
 
-        if(confirm("✅ 取得 FCM Token 成功，是否重新載入頁面？")){
-            window.location.reload(true);
-        }
-
     } catch (error) {
         console.error("❌ 主執行邏輯錯誤:", error);
         alert("❌ 主執行邏輯錯誤", error);
