@@ -1,4 +1,5 @@
 import db from './modules/IndexedDBHelper.js';
+import { initFirebase, getFCMToken, registerOnMessageHandler } from './modules/fcm.js';
 
 async function saveFirebaseKey(userApiKey) {
     await db.set('settings', 'firebaseApiKey', userApiKey);
@@ -94,11 +95,49 @@ async function saveFCMSettings(){
     //window.location.reload(true);
 }
 
+// ✅ 取得 FCM Token 並註冊推播監聽
+async function getFCMTokenEventHandler(){
+    console.log('getFCMTokenEventHandler');
+
+    try {
+        const firebaseInitialized = await initFirebase();
+        if (!firebaseInitialized) {
+          console.error("❌ Firebase 初始化失敗");
+          alert("❌ Firebase 初始化失敗", error);
+          return;
+        }
+    
+        console.log("✅ Firebase 初始化成功，開始取得 FCM Token...");
+        const fcmToken = await getFCMToken();
+        if (!fcmToken) {
+          console.error("❌ 取得 FCM Token 失敗");
+          alert("❌ 取得 FCM Token 失敗", error);
+          return;
+        }
+    
+        console.log("✅ 取得 FCM Token 成功，註冊推播監聽...");
+        registerOnMessageHandler();
+        console.log("✅ 註冊推播監聽完成");
+
+        if(confirm("✅ 取得 FCM Token 成功，是否重新載入頁面？")){
+            window.location.reload(true);
+        }
+
+    } catch (error) {
+        console.error("❌ 主執行邏輯錯誤:", error);
+        alert("❌ 主執行邏輯錯誤", error);
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
+    loadFCMSettings();
+
     document.getElementById("btn-form1-submit").addEventListener("click", saveFCMSettings);
+
+    document.getElementById("btn-get-fcm-token").addEventListener("click", getFCMTokenEventHandler);
 });
 
 
-loadFCMSettings();
+
 
