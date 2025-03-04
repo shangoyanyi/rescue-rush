@@ -1,8 +1,6 @@
 // Import Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
-// import { initializeApp } from "./libs/google/firebase-app.js";
-// import { getMessaging, getToken, onMessage } from "./libs/google/firebase-messaging.js";
 import db from './IndexedDBHelper.js';
 
 let firebaseConfig = null;
