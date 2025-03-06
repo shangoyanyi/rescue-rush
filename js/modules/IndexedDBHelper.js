@@ -14,7 +14,10 @@ class IndexedDBHelper {
                     db.createObjectStore('settings', { keyPath: 'key' });
                 }
                 if (!db.objectStoreNames.contains('userData')) {
-                    db.createObjectStore('userData', { keyPath: 'key' });
+                    db.createObjectStore('userData', { keyPath: "id", autoIncrement: true });
+                }
+                if (!db.objectStoreNames.contains('notifications')) {
+                    db.createObjectStore('notifications', { keyPath: "id", autoIncrement: true });
                 }
             }
         });
