@@ -52,15 +52,55 @@ self.addEventListener("push", function(event) {
         console.warn("⚠️ 無法解析推播內容，改用純文字模式:", error);
         payload = { notification: { title: "通知", body: event.data.text() }};
     }
-
     console.log("📩 推播通知內容:", payload);
 
-    const options = {
-        body: payload.notification.body,
-        icon: "/images/logo.png",
-    };
-
     event.waitUntil(
-        self.registration.showNotification(payload.notification.title, options)
+        (async () => {
+            // 存入 IndexedDB
+            await saveNotificationToIndexedDB(payload);
+
+            // 顯示 Notification
+            const title = payload.notification.title;
+            const options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon || "/images/logo.png",
+                badge: "/images/badge.png"
+            };
+            self.registration.showNotification(title, options)
+        })()
     );
 });
+
+
+// Service Worker 內的函式：將 push 事件收到的通知存入 IndexedDB
+async function saveNotificationToIndexedDB(notificationData) {
+    return new Promise((resolve, reject) => {
+        const dbPromise = indexedDB.open("pwaDatabase", 1);
+
+        dbPromise.onupgradeneeded = function (event) {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains('notifications')) {
+                db.createObjectStore('notifications', { keyPath: 'id', autoIncrement: true });
+            }
+        };
+
+        dbPromise.onsuccess = function (event) {
+            const db = event.target.result;
+            const tx = db.transaction("notifications", "readwrite");
+            const store = tx.objectStore("notifications");
+
+            store.add({
+                timestamp: Date.now(),
+                data: notificationData
+            });
+
+            console.log("✅ 推播通知已存入 IndexedDB");
+            resolve();
+        };
+
+        dbPromise.onerror = function (event) {
+            console.error("❌ IndexedDB 存入失敗:", event.target.error);
+            reject(event.target.error);
+        };
+    });
+}
