@@ -79,6 +79,12 @@ async function saveNotificationToIndexedDB(notificationData) {
 
         dbPromise.onupgradeneeded = function (event) {
             const db = event.target.result;
+            if (!db.objectStoreNames.contains('settings')) {
+                db.createObjectStore('settings', { keyPath: 'key' });
+            }
+            if (!db.objectStoreNames.contains('userData')) {
+                db.createObjectStore('userData', { keyPath: "id", autoIncrement: true });
+            }
             if (!db.objectStoreNames.contains('notifications')) {
                 db.createObjectStore('notifications', { keyPath: 'id', autoIncrement: true });
             }
