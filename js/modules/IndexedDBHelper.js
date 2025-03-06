@@ -53,6 +53,28 @@ class IndexedDBHelper {
         const db = await this.dbPromise;
         return db.getAll(storeName);
     }
+
+    
+    /** 🔥 刪除整個 IndexedDB */
+    async deleteDatabase() {
+        return new Promise((resolve, reject) => {
+            const deleteRequest = indexedDB.deleteDatabase(this.dbName);
+            
+            deleteRequest.onsuccess = () => {
+                console.log(`✅ IndexedDB '${this.dbName}' 已刪除`);
+                resolve(true);
+            };
+
+            deleteRequest.onerror = (event) => {
+                console.error(`❌ 刪除 IndexedDB '${this.dbName}' 失敗:`, event.target.error);
+                reject(event.target.error);
+            };
+
+            deleteRequest.onblocked = () => {
+                console.warn(`⚠️ 刪除 IndexedDB '${this.dbName}' 被擋住，請關閉所有使用該 DB 的頁面後再試`);
+            };
+        });
+    }   
 }
 
 export default new IndexedDBHelper();
