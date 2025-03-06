@@ -37,9 +37,9 @@ function testIdb() {
     alert("測試完成");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btn-test-idb").addEventListener("click", testIdb);
-});
+
+
+
 
 
 // ✅ 從 IndexedDB 讀取 loadFCMSettings 並填入 `form1`
@@ -136,8 +136,18 @@ async function getFCMTokenEventHandler(){
 document.addEventListener("DOMContentLoaded", () => {
     loadFCMSettings();
 
-    document.getElementById("btn-form1-submit").addEventListener("click", saveFCMSettings);
+    document.getElementById("btn-test-idb").addEventListener("click", testIdb);    
+    document.getElementById("btn-delete-idb").addEventListener("click", async () => {
+        if(!confirm("將會刪除整個 indexedDB，確定刪除?")){
+            return;
+        }
+        await db.deleteDatabase();
+        console.log("🔥 整個 PWA Database 已被刪除");
+        alert("🔥 整個 PWA Database 已被刪除，請更新 PWA")
+    });
+    
 
+    document.getElementById("btn-form1-submit").addEventListener("click", saveFCMSettings);
     document.getElementById("btn-get-fcm-token").addEventListener("click", getFCMTokenEventHandler);
 });
 
