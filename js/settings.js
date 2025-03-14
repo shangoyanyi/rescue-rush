@@ -111,7 +111,12 @@ async function getFCMTokenEventHandler(){
         }
     
 
-        console.log("✅ 取得 FCM Token 成功，註冊推播監聽...");        
+        console.log("✅ 取得 FCM Token 成功，更新form1");        
+        // 填入 form1
+        document.getElementById("fcmToken").textContent = fcmToken || "";
+        
+
+        console.log("註冊推播監聽...");
         const messaging = await getMessagingObject();
         if (!messaging) {
             console.warn("⚠️ Firebase Messaging 尚未初始化");
