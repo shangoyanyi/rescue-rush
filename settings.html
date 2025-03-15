@@ -77,28 +77,25 @@
             <div><button id="btn-test-idb">測試 indexedDB</button></div>
             
 
-            <hr>
-
-            <h2>刪除indexedDB</h2>
-            <div><button id="btn-delete-idb">刪除 indexedDB</button></div>            
-
+            
             <hr>
             
 
             <div id="form1">
-                <h2>FCM 連線設定</h2>
+                <h2>Firebase 連線參數設定</h2>
                 <p>FirebaseConfig JSON String:</p>
                 <textarea placeholder="請輸入 FirebaseConfig JSON String" id="firebaseConfigJSONString"></textarea>
-
                 <p>vapidKey: <input type="text" placeholder="請輸入vapidKey" value="" id="vapidKey"></p>
-
-                <p>fcmToken: <span id="fcmToken" style="word-wrap: break-word;"></span></p>
-                
                 <div><button id="btn-form1-submit">儲存設定</button></div>
-                <br>
-                <div><button id="btn-get-fcm-token">取得 fcmToken (接收推播)</button></div>
-                
             </div>
+
+            <hr>
+
+            <h2>FCM Token 管理</h2>
+            <p>fcmToken: <span id="fcmToken" style="word-wrap: break-word;"></span></p>
+            <div><button id="btn-get-fcm-token">取得 fcmToken (接收推播)</button></div>
+            <div><button id="btn-delete-fcm-token">清除 fcmToken (關閉接收推播)</button></div>
+            
         </div>
         <div>&nbsp;</div>
         <div>&nbsp;</div>
