@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script defer src="js/script.js"></script>
 
-    <script type="module" src="js/settings.js"></script>
+    <script type="module" src="messages.js"></script>
 
     <link rel="stylesheet" href="css/nana.css">
     <script defer src="js/nana.js"></script>
@@ -64,7 +64,7 @@
         <div class="header-logo">            
             <div class="header-title">Rescue Rush!</div>
         </div>        
-        <div class="header-btn-menu">             
+        <div class="header-btn-menu">            
             <span id="updateBtn">⟳</span>
         </div>
     </div>
@@ -72,32 +72,11 @@
 
     <div class="container">
         <div class="content-box">
-            <h1>設定</h2>
-
-            <h2>測試indexedDB</h2>
-            <div><button id="btn-test-idb">測試 indexedDB</button></div>
-            
-
-            
-            <hr>
-            
-
-            <div id="form1">
-                <h2>Firebase 連線參數設定</h2>
-                <p>FirebaseConfig JSON String:</p>
-                <textarea placeholder="請輸入 FirebaseConfig JSON String" id="firebaseConfigJSONString"></textarea>
-                <p>vapidKey: <input type="text" placeholder="請輸入vapidKey" value="" id="vapidKey"></p>
-                <div><button id="btn-form1-submit">儲存設定</button></div>
-            </div>
-
-            <hr>
-
-            <h2>FCM Token 管理</h2>
-            <p>fcmToken: <span id="fcmToken" style="word-wrap: break-word;"></span></p>
-            <div><button id="btn-get-fcm-token">取得 fcmToken (接收推播)</button></div>
-            <br>
-            <div><button id="btn-delete-fcm-token">清除 fcmToken (關閉接收推播)</button></div>
-            
+            <h1>📩 已接收的通知</h1>
+            <button id="refresh-btn">🔄 重新載入</button>
+            <ul id="notifications-list">
+                <!-- 通知會動態插入到這裡 -->
+            </ul>            
         </div>
         <div>&nbsp;</div>
         <div>&nbsp;</div>

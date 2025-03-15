@@ -20,6 +20,10 @@ function handleOption(option) {
         location.href = 'index.html';
     }
 
+    if('messages'==option){
+        location.href = 'messages.html';
+    }
+
     if('settings'==option){
         location.href = 'settings.html';
     }
