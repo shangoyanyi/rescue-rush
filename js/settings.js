@@ -142,15 +142,15 @@ async function deleteFCMTokenEventHandler(){
     console.log('deleteFCMTokenEventHandler');
 
     try {
-        const messaging = await getMessagingObject();
-        if (!messaging) {
-            console.warn("⚠️ Firebase Messaging 尚未初始化");
-            return;
-        }
+        // const messaging = await getMessagingObject();
+        // if (!messaging) {
+        //     console.warn("⚠️ Firebase Messaging 尚未初始化");
+        //     return;
+        // }
 
         console.log("✅ 清除 FCM Token...");
-        // 清除 FCM Token
-        await messaging.deleteToken();
+        // // 清除 FCM Token
+        // await messaging.deleteToken();
 
         // 更新 IndexedDB
         await db.delete('settings', 'fcmToken');
