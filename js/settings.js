@@ -111,23 +111,24 @@ async function getFCMTokenEventHandler(){
         }
     
 
-        console.log("✅ 取得 FCM Token 成功，更新form1");        
-        // 填入 form1
+        console.log("✅ 取得 FCM Token 成功，更新 form1");
+
+        // 更新 form1
         document.getElementById("fcmToken").textContent = fcmToken || "";
         
 
-        console.log("註冊推播監聽...");
-        const messaging = await getMessagingObject();
-        if (!messaging) {
-            console.warn("⚠️ Firebase Messaging 尚未初始化");
-            return;
-        }
+        // console.log("註冊推播監聽...");
+        // const messaging = await getMessagingObject();
+        // if (!messaging) {
+        //     console.warn("⚠️ Firebase Messaging 尚未初始化");
+        //     return;
+        // }
 
-        onMessage(messaging, (payload) => {
-            console.log("📩 收到推播訊息:", payload);
-            alert("📩 收到推播訊息", JSON.stringify(payload));
-        });        
-        console.log("✅ 註冊推播監聽完成");
+        // onMessage(messaging, (payload) => {
+        //     console.log("📩 收到推播訊息:", payload);
+        //     alert("📩 收到推播訊息", JSON.stringify(payload));
+        // });        
+        // console.log("✅ 註冊推播監聽完成");
 
     } catch (error) {
         console.error("❌ 主執行邏輯錯誤:", error);
@@ -136,24 +137,46 @@ async function getFCMTokenEventHandler(){
 }
 
 
+// ✅ 清除 FCM Token
+async function deleteFCMTokenEventHandler(){
+    console.log('deleteFCMTokenEventHandler');
+
+    try {
+        const messaging = await getMessagingObject();
+        if (!messaging) {
+            console.warn("⚠️ Firebase Messaging 尚未初始化");
+            return;
+        }
+
+        console.log("✅ 清除 FCM Token...");
+        // 清除 FCM Token
+        await messaging.deleteToken();
+
+        // 更新 IndexedDB
+        await db.delete('settings', 'fcmToken');
+
+        console.log("✅ 清除 FCM Token 完成");
+
+        // 更新 form1
+        document.getElementById("fcmToken").textContent = "";
+
+    } catch (error) {
+        console.error("❌ 清除 FCM Token 失敗:", error);
+        alert("❌ 清除 FCM Token 失敗", error);
+    }
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
     loadFCMSettings();
 
     document.getElementById("btn-test-idb").addEventListener("click", testIdb);    
-    document.getElementById("btn-delete-idb").addEventListener("click", async () => {
-        if(!confirm("將會刪除整個 indexedDB，確定刪除?")){
-            return;
-        }
-        await db.deleteDatabase();
-        console.log("🔥 整個 PWA Database 已被刪除");
-        alert("🔥 整個 PWA Database 已被刪除，請更新 PWA")
-    });
+    
     
 
     document.getElementById("btn-form1-submit").addEventListener("click", saveFCMSettings);
     document.getElementById("btn-get-fcm-token").addEventListener("click", getFCMTokenEventHandler);
+    document.getElementById("btn-delete-fcm-token").addEventListener("click", deleteFCMTokenEventHandler);
 });
 
 
