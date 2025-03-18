@@ -7,10 +7,10 @@
     <!-- 
         將 normal webApp 轉換成 PWA 的兩個關鍵元件 
           1. manifest.js (讓瀏覽器識別這是一個 PWA 應用)
-          2. 註冊 service-worker
+          2. 註冊 service-worker (整合到 index.js 內)
     -->
     <link rel="manifest" href="manifest.json">
-    <script>
+    <!-- <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistration().then((registration) => {
                 if (!registration) {
@@ -24,7 +24,7 @@
             });
         }
 
-    </script>
+    </script> -->
     
     <!-- 共用 pwa 管理員 -->
     <script defer src="js/pwa-manager.js"></script>

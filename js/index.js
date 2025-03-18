@@ -51,8 +51,24 @@ function updateLocationInfo() {
 
 
 /* ==== js 進入點 ==== */
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     console.log("✅ DOM 加載完成，初始化 PWA...");
+
+    // 註冊 service-worker
+    if ("serviceWorker" in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.getRegistration();
+            if (!registration) {
+                const reg = await navigator.serviceWorker.register("/service-worker.js");
+                console.log("✅ Service Worker Registered!", reg);
+            } else {
+                console.log("🔄 Service Worker 已經註冊過了:", registration);
+            }
+        } catch (err) {
+            console.error("❌ Service Worker 註冊失敗:", err);
+        }
+    }
+
 
     // 資料初始化
     // 取得所在地點資料
