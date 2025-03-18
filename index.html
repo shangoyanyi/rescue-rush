@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rescue Rush!</title>
+    <!-- 
+        將 normal webApp 轉換成 PWA 的兩個關鍵元件 
+          1. manifest.js (讓瀏覽器識別這是一個 PWA 應用)
+          2. 註冊 service-worker (透過 pwa-manager.js 管理 sw 的生命週期控制)
+    -->
     <link rel="manifest" href="manifest.json">
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
-            .then(reg => console.log("Service Worker Registered!", reg))
-            .catch(err => console.log("Service Worker Failed!", err));
-        }
-    </script>    
+    <script defer src="js/pwa-manager.js"></script>
+    
+    <!-- 共用 css -->
     <link rel="stylesheet" href="css/styles.css">
-    <script defer src="js/script.js"></script>
-
+    
+    <!-- 頁面專屬js -->
     <script defer src="js/index.js"></script>
 
+    <!-- 附加 elements  -->
     <link rel="stylesheet" href="css/dropdown.css">
     <script defer src="js/dropdown.js"></script>
 

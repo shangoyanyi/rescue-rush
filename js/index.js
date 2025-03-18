@@ -63,5 +63,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("updateBtn").addEventListener("click", updatePWA);
 
     // 初始化 firebase (fcm 功能)
-    initFirebase();
+    // initFirebase();
 });
