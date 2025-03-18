@@ -28,15 +28,15 @@ function updatePWA() {
 
 
 // 集中管理 SW 註冊，所有頁面都載入這支 js
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistration().then((registration) => {
-        if (!registration) {
-            // 只有當沒有 SW 註冊時才會註冊
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(reg => console.log("✅ Service Worker Registered!", reg))
-                .catch(err => console.log("❌ Service Worker Failed!", err));
-        } else {
-            console.log("🔄 Service Worker 已經註冊過了:", registration);
-        }
-    });
-}
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.getRegistration().then((registration) => {
+//         if (!registration) {
+//             // 只有當沒有 SW 註冊時才會註冊
+//             navigator.serviceWorker.register('/service-worker.js')
+//                 .then(reg => console.log("✅ Service Worker Registered!", reg))
+//                 .catch(err => console.log("❌ Service Worker Failed!", err));
+//         } else {
+//             console.log("🔄 Service Worker 已經註冊過了:", registration);
+//         }
+//     });
+// }

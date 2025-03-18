@@ -40,21 +40,6 @@ self.addEventListener("fetch", event => {
     );
 });
 
-// sw 啟動時，強制刪除舊版本避免多個 sw 同時存在
-self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        self.clients.claim().then(() => {
-            return self.registration.unregister().then(() => {
-                return caches.keys().then((cacheNames) => {
-                    return Promise.all(
-                        cacheNames.map((cacheName) => caches.delete(cacheName))
-                    );
-                });
-            });
-        })
-    );
-});
-
 // 接收推播通知
 self.addEventListener("push", function(event) {
     console.log("📩 收到背景推播事件", event);
