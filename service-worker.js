@@ -17,8 +17,7 @@ const FILES_TO_CACHE = [
     "js/modules/libs/google/index-min.js",
     "js/modules/IndexedDBHelper.js",
     "js/dropdown.js",
-    "js/nana.js",
-    "js/script.js",
+    "js/nana.js",    
     "js/settings.js"
 ];
 

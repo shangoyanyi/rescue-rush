@@ -55,14 +55,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("✅ DOM 加載完成，初始化 PWA...");
 
     // 註冊 service-worker
+    console.log("✅ 檢查並註冊 Service Worker...");
     if ("serviceWorker" in navigator) {
         try {
-            const registration = await navigator.serviceWorker.getRegistration();
-            if (!registration) {
-                const reg = await navigator.serviceWorker.register("/service-worker.js");
+            // 🔍 檢查所有已註冊的 Service Worker
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            console.log("🔍 目前已註冊的 Service Worker:", registrations);
+
+            if (registrations.length === 0) {
+                console.log("⚠️ 沒有已註冊的 Service Worker，開始註冊...");
+                const reg = await navigator.serviceWorker.register("/service-worker.js", { scope: "/" });
                 console.log("✅ Service Worker Registered!", reg);
             } else {
-                console.log("🔄 Service Worker 已經註冊過了:", registration);
+                console.log("🔄 Service Worker 已經註冊過了:", registrations[0]);
             }
         } catch (err) {
             console.error("❌ Service Worker 註冊失敗:", err);
