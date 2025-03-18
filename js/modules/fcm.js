@@ -62,11 +62,18 @@ async function getFCMToken() {
       return;
     }
 
+    console.log("✅ 檢查 indexDB內是否有 FCM Token...");
     const fcmToken = await db.get('settings', 'fcmToken');
     if (fcmToken) return fcmToken; // 如果已存在，直接回傳
 
+    console.log("✅ indexDB內沒有 FCM Token, 取得當前的 sw");
     const registration = await navigator.serviceWorker.ready;
+    console.log("✅ 取得當前的 sw 完成");
+
+    console.log("✅ 向 firebase 發送 getToken 要求");
     const token = await getToken(messaging, { vapidKey: vapidKey, serviceWorkerRegistration: registration });
+
+    console.log("✅ 向 firebase 發送 getToken 要求完成");
 
     if (token) {
       console.log("✅ 取得 FCM Token:", token);
