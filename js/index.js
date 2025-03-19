@@ -82,7 +82,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 事件監聽
     // PWA 更新按鈕點擊事件
     document.getElementById("updateBtn").addEventListener("click", updatePWA);
-
-    // 初始化 firebase (fcm 功能)
-    // initFirebase();
 });

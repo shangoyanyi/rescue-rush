@@ -1,6 +1,7 @@
-import {onMessage } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
+// import {onMessage } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-messaging.js";
 import db from './modules/IndexedDBHelper.js';
-import { initFirebase, getMessagingObject, getFCMToken } from './modules/fcm.js';
+import firebase from './modules/FirebaseHelper.js';
+// import { initFirebase, getMessagingObject, getFCMToken } from './modules/fcm.js';
 
 async function saveFirebaseKey(userApiKey) {
     await db.set('settings', 'firebaseApiKey', userApiKey);
@@ -90,50 +91,61 @@ async function saveFCMSettings(){
     }
 }
 
-// ✅ 取得 FCM Token 並註冊推播監聽
+
+
+// ✅ 取得 FCM Token 並訂閱 web push
 async function getFCMTokenEventHandler(){
     console.log('getFCMTokenEventHandler');
 
     try {
-        const firebaseInitialized = await initFirebase();
-        if (!firebaseInitialized) {
-          console.error("❌ Firebase 初始化失敗");
-          alert("❌ Firebase 初始化失敗", error);
-          return;
-        }
-    
-        console.log("✅ Firebase 初始化成功，開始取得 FCM Token...");
-        const fcmToken = await getFCMToken();
+        console.log("✅ 取得 FCM Token");
+        await firebase.initFirebase();
+        const fcmToken = await firebase.getFcmToken();
+
         if (!fcmToken) {
-          console.error("❌ 取得 FCM Token 失敗");
-          alert("❌ 取得 FCM Token 失敗", error);
-          return;
-        }
-    
-
-        console.log("✅ 取得 FCM Token 成功，更新 form1");
-
+            console.error("❌ 取得 FCM Token 失敗");
+            alert("❌ 取得 FCM Token 失敗", error);
+            return;
+        }  
+        console.log("✅ 取得 FCM Token 成功:", fcmToken);
+  
         // 更新 form1
+        console.log("✅ 取得 FCM Token 成功，更新 form1");
         document.getElementById("fcmToken").textContent = fcmToken || "";
-        
-
-        // console.log("註冊推播監聽...");
-        // const messaging = await getMessagingObject();
-        // if (!messaging) {
-        //     console.warn("⚠️ Firebase Messaging 尚未初始化");
-        //     return;
-        // }
-
-        // onMessage(messaging, (payload) => {
-        //     console.log("📩 收到推播訊息:", payload);
-        //     alert("📩 收到推播訊息", JSON.stringify(payload));
-        // });        
-        // console.log("✅ 註冊推播監聽完成");
 
     } catch (error) {
         console.error("❌ 主執行邏輯錯誤:", error);
         alert("❌ 主執行邏輯錯誤", error);
     }
+
+
+    // try {
+    //     const firebaseInitialized = await initFirebase();
+    //     if (!firebaseInitialized) {
+    //       console.error("❌ Firebase 初始化失敗");
+    //       alert("❌ Firebase 初始化失敗", error);
+    //       return;
+    //     }
+    
+    //     console.log("✅ Firebase 初始化成功，開始取得 FCM Token...");
+    //     const fcmToken = await getFCMToken();
+    //     if (!fcmToken) {
+    //       console.error("❌ 取得 FCM Token 失敗");
+    //       alert("❌ 取得 FCM Token 失敗", error);
+    //       return;
+    //     }
+    
+
+    //     console.log("✅ 取得 FCM Token 成功，更新 form1");
+
+    //     // 更新 form1
+    //     document.getElementById("fcmToken").textContent = fcmToken || "";
+
+
+    // } catch (error) {
+    //     console.error("❌ 主執行邏輯錯誤:", error);
+    //     alert("❌ 主執行邏輯錯誤", error);
+    // }
 }
 
 
