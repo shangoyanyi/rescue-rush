@@ -2,6 +2,7 @@ import { openDB } from './libs/google/index-min.js';
 
 class IndexedDBHelper {
     constructor(dbName = 'pwaDatabase', version = 1) {
+        console.log(`[${this.constructor.name}] Initialized.`);
         this.dbName = dbName;
         this.version = version;
         this.dbPromise = this.initDB();
