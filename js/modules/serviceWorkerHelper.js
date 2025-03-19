@@ -4,6 +4,7 @@ class ServiceWorkerHelper {
         console.log(`[${this.constructor.name}] Initialized.`);
     }
 
+    // 檢查 web push 訂閱
     async checkPushSubscription() {
         if (!('serviceWorker' in navigator)) {
             console.warn(`[${this.constructor.name}] 瀏覽器不支援 Service Worker`);
@@ -31,6 +32,32 @@ class ServiceWorkerHelper {
             return null;
         }
     }
+    
+    
+    // 取消 web push 訂閱
+    async nsubscribePushNotifications() {
+        if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+            console.warn("瀏覽器不支援 Web Push");
+            return false;
+        }
+    
+        try {
+            const registration = await navigator.serviceWorker.ready;
+            const subscription = await registration.pushManager.getSubscription();
+    
+            if (subscription) {
+                const unsubscribed = await subscription.unsubscribe();
+                console.log("成功取消 Push 訂閱:", unsubscribed);
+                return unsubscribed;
+            } else {
+                console.log("沒有可取消的 Push 訂閱");
+                return false;
+            }
+        } catch (error) {
+            console.error("取消 Push 訂閱時發生錯誤:", error);
+            return false;
+        }
+    }    
 }
 
 export default new ServiceWorkerHelper();
