@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/styles.css">    
 
     <!-- 頁面專屬js -->
+    <link rel="stylesheet" href="css/messages.css"> 
     <script type="module" src="js/messages.js"></script>
 
     <!-- 附加 components  -->
@@ -75,12 +76,29 @@
 
 
     <div class="container">
+        <div class="content-box-loading" id="content-box-loading"><img src="./images/loading.gif"></div>
+        
         <div class="content-box">
-            <h1>📩 已接收的通知</h1>
-            <button id="refresh-btn">🔄 重新載入</button>
-            <ul id="notifications-list">
-                <!-- 通知會動態插入到這裡 -->
-            </ul>            
+            <h1>通知</h1>
+            <div id="message-list" class="message-container">
+                <!-- 通知會動態插入到這裡 -->                
+            </div>
+
+            <!-- HTML 內定義通知的模板 -->
+            <template id="message-template">
+                <div class="message">
+                    <div class="message-header">
+                        <div class="message-type">🔔 系統通知</div>
+                        <div class="message-time"></div>
+                    </div>
+                    <div class="message-body">
+                        <p class="message-title"></p>
+                        <p class="message-content"></p>
+                    </div>                        
+                </div>
+            </template>
+
+            
         </div>
         <div>&nbsp;</div>
         <div>&nbsp;</div>

@@ -186,3 +186,7 @@ a {
     color: #2DD4BF;
     text-decoration: none;
 }
+
+h1 {
+    margin:0;
+}

@@ -1,0 +1,51 @@
+/* 通知列表區域 */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top:8px;    
+}
+
+/* 單條訊息 */
+.message {
+    background: white;
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);    
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 確保垂直置中 */
+    padding-bottom: 6px;
+    text-align: right;
+    border-bottom:1px solid #2DD4BF;
+}
+.message-header .message-type {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2DD4BF;
+}
+.message-header .message-time {
+    font-size: 11px;
+    color: #2DD4BF;
+}
+
+.message-body {
+    padding-top: 6px;
+    font-size: 16px;
+}
+
+.message-title {
+    font-weight: bold;
+    color: #555;
+    padding:0;
+    margin:4px;
+}
+
+.message-content {
+    color: #555;
+    padding:0;
+    margin:4px;
+}
