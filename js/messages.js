@@ -39,6 +39,9 @@ async function loadNotifications() {
     notifications.forEach(notification => {
         const clone = document.importNode(template.content, true); // 複製 template 內容
 
+        // 設置 data-id 為通知的 ID (用於後續刪除)
+        clone.querySelector(".message-wrapper").setAttribute("data-id", notification.id); 
+
         // 設置時間
         clone.querySelector(".message-time").textContent = formatTimestamp(notification.timestamp);
 
@@ -56,11 +59,93 @@ async function loadNotifications() {
 }
 
 
+async function initMessageSwipeDelete() {
+    const messages = document.querySelectorAll(".message-wrapper");
 
-document.addEventListener("DOMContentLoaded", () => { 
+    messages.forEach((wrapper) => {
+        // 取得通知編號 (來自 data-id 屬性，用於自 indexDB 刪除資料)
+        const messageId = wrapper.getAttribute("data-id");
+
+        // 觸控偵測初參數始化
+        let startX, currentX, isSwiping = false;
+        const message = wrapper.querySelector(".message");
+        const deleteBtn = wrapper.querySelector(".delete-btn");
+
+        // 觸控開始
+        wrapper.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+            isSwiping = false;
+        });
+
+        // 觸控滑動
+        wrapper.addEventListener("touchmove", (e) => {
+            currentX = e.touches[0].clientX;
+            let diffX = startX - currentX;
+            
+            if (diffX > 20) { // 滑動距離
+                wrapper.classList.add("swiped");
+                isSwiping = true;
+            } else if (diffX < -20) {
+                wrapper.classList.remove("swiped");
+                isSwiping = false;
+            }
+        });
+
+        // 滑鼠拖曳 (桌面版)
+        wrapper.addEventListener("mousedown", (e) => {
+            startX = e.clientX;
+            isSwiping = false;
+        });
+
+        wrapper.addEventListener("mousemove", (e) => {
+            if (!startX) return;
+            currentX = e.clientX;
+            let diffX = startX - currentX;
+
+            if (diffX > 20) {
+                wrapper.classList.add("swiped");
+                isSwiping = true;
+            } else if (diffX < -20) {
+                wrapper.classList.remove("swiped");
+                isSwiping = false;
+            }
+        });
+
+        wrapper.addEventListener("mouseup", () => {
+            startX = null;
+        });
+
+        // 刪除訊息
+        deleteBtn.addEventListener("click", () => {
+            wrapper.style.transition = "opacity 0.3s, transform 0.3s";
+            wrapper.style.opacity = "0";
+            wrapper.style.transform = "translateX(-100%)";
+
+            // **延遲刪除 (確保動畫跑完)**
+            setTimeout(async () => {
+                // 移除 wrapper dom 物件
+                wrapper.remove();
+                
+                // **從 IndexedDB 刪除**
+                console.log(`🗑️ 刪除通知 (ID=${messageId})`);
+                await db.delete("notifications", Number(messageId));
+                console.log("✅ 已從 IndexedDB 刪除通知");
+            }, 300);
+        });
+    });
+}
+
+
+
+document.addEventListener("DOMContentLoaded", async () => { 
     // 📥 頁面載入時讀取通知
-    loadNotifications();
+    console.log("✅ 讀取 DB 內通知訊息");
+    await loadNotifications();
 
     // 🔄 註冊重新載入按鈕
     // document.getElementById("refresh-btn").addEventListener("click", loadNotifications);
+
+    // ✅ 初始化滑動刪除功能
+    console.log("✅ 初始化訊息滑動刪除功能");
+    await initMessageSwipeDelete();
 });

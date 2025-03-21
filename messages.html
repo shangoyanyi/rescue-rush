@@ -84,15 +84,18 @@
 
             <!-- HTML 內定義通知的模板 -->
             <template id="message-template">
-                <div class="message">
-                    <div class="message-header">
-                        <div class="message-type">🔔 系統通知</div>
-                        <div class="message-time"></div>
+                <div class="message-wrapper" data-id="0">
+                    <div class="message">
+                        <div class="message-header">
+                            <div class="message-type">🔔 系統通知</div>
+                            <div class="message-time"></div>
+                        </div>
+                        <div class="message-body">
+                            <p class="message-title"></p>
+                            <p class="message-content"></p>
+                        </div>                        
                     </div>
-                    <div class="message-body">
-                        <p class="message-title"></p>
-                        <p class="message-content"></p>
-                    </div>                        
+                    <button class="delete-btn">刪除</button>
                 </div>
             </template>
         </div>

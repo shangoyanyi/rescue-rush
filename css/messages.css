@@ -6,12 +6,24 @@
     margin-top:8px;    
 }
 
+/* 外層包住 message & 刪除按鈕 */
+.message-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 /* 單條訊息 */
 .message {
+    width:100%;
     background: white;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     padding: 16px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);    
+    /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); */
+    transition: transform 0.3s ease-in-out;    
 }
 
 .message-header {
@@ -48,4 +60,27 @@
     color: #555;
     padding:0;
     margin:4px;
+}
+
+/* 刪除按鈕 */
+.delete-btn {
+    position: absolute;
+    right: -60px; /* 預設在外面 */
+    width: 60px;
+    height: 100%;
+    background: red;
+    color: white;
+    border: none;
+    /* border-radius: 8px; */
+    cursor: pointer;
+    transition: right 0.3s ease-in-out;
+}
+
+/* 滑動時的 class */
+.message-wrapper.swiped .message {
+    transform: translateX(-60px);
+}
+
+.message-wrapper.swiped .delete-btn {
+    right: 0;
 }
