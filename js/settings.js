@@ -179,11 +179,12 @@ async function deleteFCMTokenEventHandler(){
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    // 載入頁面初始資料
     loadFCMSettings();
 
+    // 綁定事件監聽
     document.getElementById("btn-test-idb").addEventListener("click", testIdb);    
-    
     
 
     document.getElementById("btn-form1-submit").addEventListener("click", saveFCMSettings);

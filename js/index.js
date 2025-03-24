@@ -75,11 +75,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    // 資料初始化
-    // 取得所在地點資料
+    // 載入頁面初始資料
+    // 載入所在地點
     updateLocationInfo();
     
-    // 事件監聽
+    // 綁定事件監聽
     // PWA 更新按鈕點擊事件
-    document.getElementById("updateBtn").addEventListener("click", updatePWA);
+    // document.getElementById("updateBtn").addEventListener("click", updatePWA);
 });

@@ -138,14 +138,15 @@ async function initMessageSwipeDelete() {
 
 
 document.addEventListener("DOMContentLoaded", async () => { 
-    // 📥 頁面載入時讀取通知
+    // 載入頁面初始資料
+    // 載入通知訊息
     console.log("✅ 讀取 DB 內通知訊息");
     await loadNotifications();
 
-    // 🔄 註冊重新載入按鈕
-    // document.getElementById("refresh-btn").addEventListener("click", loadNotifications);
-
-    // ✅ 初始化滑動刪除功能
+    // 初始化滑動刪除功能
     console.log("✅ 初始化訊息滑動刪除功能");
     await initMessageSwipeDelete();
+
+    // 綁定事件監聽
+    // ...
 });
