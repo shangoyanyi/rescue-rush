@@ -104,75 +104,99 @@
         <div>&nbsp;</div>
     </div>
 
-    <!-- 背景小方塊動畫 -->
-    <div id="background-container"></div>
-    <style>
-        /* 背景容器，確保小方塊不會超出畫面 */
-        #background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: -1; /* 確保在最底層 */
+<!-- 背景小方塊動畫 -->
+<div id="background-container"></div>
+
+<style>
+    #background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    .square {
+        position: absolute;
+        border-radius: 6px;
+        background: linear-gradient(45deg, #2DD4BF 0%, #2DD4BF 36%, #3B82F6 100%);        
+        box-shadow: 0 0 12px rgba(45, 212, 191, 0.6);
+        opacity: 0.6;
+        animation-name: breatheAndSpin;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        background-size: 200% 200%;
+    }
+
+    /* 呼吸式大小變化動畫 + 旋轉動畫 */
+    @keyframes breatheAndSpin {
+        0% {
+            transform: scale(1) rotate(0deg);
+        }
+        50% {
+            transform: scale(2) rotate(180deg);
+        }
+        100% {
+            transform: scale(1) rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("background-container");
+        const squareCount = 12;
+        const squares = [];
+
+        for (let i = 0; i < squareCount; i++) {
+            const square = document.createElement("div");
+            square.classList.add("square");
+
+            // 隨機大小 (20~80)
+            const size = 20 + Math.random() * 60;
+            square.style.width = `${size}px`;
+            square.style.height = `${size}px`;
+
+            // 隨機動畫速度
+            const animationDuration = 5 + Math.random() * 15; // 5~20 秒跑一輪
+            square.style.animation = `breatheAndSpin ${animationDuration}s infinite linear`;
+
+            // 初始位置
+            let x = Math.random() * (window.innerWidth - size);
+            let y = Math.random() * (window.innerHeight - size);
+            let speedX = (Math.random() - 0.5) * 2.5;
+            let speedY = (Math.random() - 0.5) * 2.5;
+
+            square.style.left = `${x}px`;
+            square.style.top = `${y}px`;          
+
+            container.appendChild(square);
+            squares.push({ square, x, y, speedX, speedY, size });
         }
 
-        /* 小方塊樣式 */
-        .square {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: rgba(45, 212, 191, 0.5); /* Tiffany 藍 + 半透明 */
-            border-radius: 4px; /* 圓角 */
-            box-shadow: 0 0 10px rgba(45, 212, 191, 0.6);
+        function animate() {
+            squares.forEach(obj => {
+                obj.x += obj.speedX;
+                obj.y += obj.speedY;
+
+                // 邊界碰撞
+                if (obj.x <= 0 || obj.x >= window.innerWidth - obj.size) obj.speedX *= -1;
+                if (obj.y <= 0 || obj.y >= window.innerHeight - obj.size) obj.speedY *= -1;
+
+                obj.square.style.left = `${obj.x}px`;
+                obj.square.style.top = `${obj.y}px`;
+            });
+
+            requestAnimationFrame(animate);
         }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("background-container");
-            const squareCount = 8; // 可調整方塊數量
-            const squares = [];
 
-            // 產生小方塊
-            for (let i = 0; i < squareCount; i++) {
-                const square = document.createElement("div");
-                square.classList.add("square");
+        animate();
+    });
+</script>
+<!-- End-of- 背景小方塊動畫 -->
 
-                // 隨機初始位置
-                let x = Math.random() * window.innerWidth;
-                let y = Math.random() * window.innerHeight;
-                let speedX = (Math.random() - 0.5) * 3; // X 軸速度
-                let speedY = (Math.random() - 0.5) * 3; // Y 軸速度
-
-                square.style.left = `${x}px`;
-                square.style.top = `${y}px`;
-
-                container.appendChild(square);
-                squares.push({ square, x, y, speedX, speedY });
-            }
-
-            // 動畫更新函數
-            function animate() {
-                squares.forEach(obj => {
-                    obj.x += obj.speedX;
-                    obj.y += obj.speedY;
-
-                    // 邊界檢測 (碰撞反彈)
-                    if (obj.x <= 0 || obj.x >= window.innerWidth - 20) obj.speedX *= -1;
-                    if (obj.y <= 0 || obj.y >= window.innerHeight - 20) obj.speedY *= -1;
-
-                    // 更新位置
-                    obj.square.style.left = `${obj.x}px`;
-                    obj.square.style.top = `${obj.y}px`;
-                });
-
-                requestAnimationFrame(animate);
-            }
-
-            animate(); // 啟動動畫
-        });
-    </script>
-    <!-- End-of- 背景小方塊動畫 -->
 </body>
 </html>
