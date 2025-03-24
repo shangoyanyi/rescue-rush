@@ -47,17 +47,16 @@ body {
 }
 
 /* Menu 按鈕樣式 */
-.header .header-btn-menu {
-    font-size: 32px;
+.header .header-btn-menu .btn-menu {
+    padding-left:10px;
     cursor: pointer;
-    color: #fff;
-    line-height: 48px;
+}
+.header .header-btn-menu img {
+    width:28px;
+    height: auto;
 }
 
-/* Hover 樣式 */
-.header .header-btn-menu:hover {
-    color: #fff; /* 可以自定義顏色 */
-}
+
 
 
 
